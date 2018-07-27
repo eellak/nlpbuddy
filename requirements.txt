@@ -1,0 +1,5 @@
+Django
+spacy
+django-cors-headers
+rpdb
+uwsgi
