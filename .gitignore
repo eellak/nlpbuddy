@@ -1,0 +1,8 @@
+*~
+.*.sw[opn]
+*.py[cod]
+*.egg-info
+.DS_Store
+.cache
+__pycache__/
+
