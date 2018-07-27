@@ -16,10 +16,11 @@ def about(request):
 def analyze(request):
     'API text analyze view'
     if request.method == 'POST':
-#        text = request.POST.get("text", "")
+        text = request.POST.get("text", "")
         # TODO: will remove once js sends text as expected
-        for key in request.POST.dict().keys():
-            text = key
+        if not text:
+            for key in request.POST.dict().keys():
+                text = key
         # add some limit here
         text = text[:200000]
         ret = {}
