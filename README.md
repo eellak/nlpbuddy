@@ -3,7 +3,7 @@
 
 This is a text analysis application for performing common NLP tasks through a web dashboard interface and an API. 
 
-It leverages spaCy.io for the NLP tasks plus Gensim's implementation of the TextRank algorithm for text summarization. 
+It leverages [Spacy](https://spacy.io) for the NLP tasks plus [Gensim's](https://github.com/RaRe-Technologies/gensim) implementation of the TextRank algorithm for text summarization. 
 
 It supports Greek and English texts, with automatic identification of language. 
 
@@ -19,5 +19,6 @@ Tasks include:
 
 Αθλητισμός, Ελλάδα, Επιστήμη, Κόσμος, Οικονομία, Περιβάλλον, Πολιτική, Τέχνες, Υγεία 
 
-Classifier is built with FastText and is trained in 20.000 articles labeled in these categories.
+Classifier is built with [FastText](https://fasttext.cc) and is trained in 20.000 articles labeled in these categories.
+
 
