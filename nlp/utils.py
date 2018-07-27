@@ -1,4 +1,5 @@
 from gensim.summarization import summarize
+
 from django.conf import settings
 
 ENTITIES_MAPPING = {
@@ -23,10 +24,14 @@ def analyze_text(text):
         doc = lang(text)
         ret['language'] = settings.LANGUAGE_MAPPING[language]
 
-        
-        ret['text'] = '''
-         <span title="POS: DET, LEMMA: Ο">Ο</span> <span style="color:red" title="POS: NOUN, LEMMA: Θησέας">Θησέας</span> <span title="POS: VERB, LEMMA: σκοτώνω">σκότωσε</span> <span title="POS: DET, LEMMA: Ο">το</span> <span style="color:red" title="POS: NOUN, LEMMA: Μινώταυρος">Μινώταυρο</span>
-         '''
+        analyzed_text = ''
+        for token in doc:
+            #analyzed_text += '<span title="POS: {0}, LEMMA: {1}, DEP: {2}">{3} </span>'.format(token.pos_, token.lemma_, token.dep_, token.text)
+            analyzed_text += '<span class="tooltip" data-content="POS: {0}<br> LEMMA: {1}<br> DEP: {2}"><i class="material-icons"></i>{3} </span>'.format(token.pos_, token.lemma_, token.dep_, token.text)
+
+
+        ret['text'] = analyzed_text
+
         if language == 'el':
             ret['category'] = 'Soon_to_come'
         else:
@@ -36,8 +41,16 @@ def analyze_text(text):
             ret['summary'] = summarize(text)
         except ValueError: # why does it break?
             ret['summary'] = ''
-        ret['keywords'] =  'σπαθι, δεντρο, χερι'
-        
+
+        keywords = []
+        for token in doc:
+            if not token.is_stop:
+                if token.pos_ in ['VERB', 'ADJ', 'NOUN', 'ADV', 'AUX', 'PROPN']:
+                    keywords.append(token.lemma_)
+        # TODO: ordered dict, show most frequent
+
+        ret['keywords'] =  ', '.join(keywords[:10])
+
         # Named Entities
         entities = {label:[] for key, label in ENTITIES_MAPPING.items()}
         for ent in doc.ents:                      
