@@ -1,0 +1,36 @@
+server {
+    listen 80;
+    server_name nlp.wordgames.gr;
+
+        gzip on;
+        access_log /var/log/nginx/nlp.wordgames.gr.access.log ;
+
+    error_log  /var/log/nginx/nlp.wordgames.gr.error.log  warn;
+
+
+        location /static {
+            alias /opt/demo-app/demo/static ;
+        }
+
+        location /media {
+            alias /opt/demo-app/demo/media ;
+        }
+
+        location /media/uploaded_content/original {
+            deny all;
+        }
+
+    location / {
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+        add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+
+        include /etc/nginx/uwsgi_params;
+        uwsgi_pass 127.0.0.1:9000;
+
+    }
+
+
+}
+
