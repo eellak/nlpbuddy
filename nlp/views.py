@@ -1,17 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-
-import spacy
 from .utils import analyze_text
-
-# load the two language models. Currently supported languages are 
-# Greek, English
-
-LANGUAGE_MODELS = {
-        'Greek': spacy.load('el_core_web_sm'),
-        'English': spacy.load('en_core_web_sm')
-    }    
-
 
 def index(request):
     'Index view'
@@ -25,6 +14,7 @@ def about(request):
 
 
 def analyze(request):
+    'API text analyze view'
     if request.method == 'POST':
 #        text = request.POST.get("text", "")
         # TODO: will remove once js sends text as expected
@@ -33,7 +23,7 @@ def analyze(request):
         # add some limit here
         text = text[:200000]
         ret = {}
-        ret = analyze_text(LANGUAGE_MODELS, text)
+        ret = analyze_text(text)
 
         if not text:
             response = JsonResponse({'status':'false','message':'need some text here!'})

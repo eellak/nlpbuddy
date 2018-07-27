@@ -1,4 +1,5 @@
 from gensim.summarization import summarize
+from django.conf import settings
 
 ENTITIES_MAPPING = {
     'PERSON': 'person',
@@ -8,10 +9,10 @@ ENTITIES_MAPPING = {
     }
 
 
-def analyze_text(models, text):
+def analyze_text(text):
         # TODO: find language
         # language = models['
-        lang = models['Greek']
+        lang = settings.LANGUAGE_MODELS['Greek']
         ret = {}
         doc = lang(text)
         ret['language'] = 'Greek'

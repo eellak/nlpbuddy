@@ -148,3 +148,15 @@ LOGGING = {
     },
 }
 
+import spacy
+# load the two language models. Currently supported languages are 
+# Greek, English
+# Takes some time to load
+
+LANGUAGE_MODELS = {
+    'Greek': spacy.load('el_core_web_sm'),
+    'Greek-huge': spacy.load('el_core_web_lg'),
+    'English': spacy.load('en_core_web_sm')
+}
+
+
