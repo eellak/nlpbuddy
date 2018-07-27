@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+	
+<head>
+    <meta charset="utf-8" />
+    <title>Open Source Text Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&amp;subset=greek" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css" rel="stylesheet" />
+    <link href="{% static "css/style.css" %}" rel="stylesheet" />
+    <script src="{% static "js/en.js" %}"></script>
+    <script src="{% static "js/en-static-texts.js" %}"></script>
+</head>
+
+<body>
+    <header class="cf">
+        <div class="logo">
+            <h1><a href="/" title="GR Text Analysis">Open Source Text Analysis</a></h1>
+        </div>
+        <div class="toggle-nav">
+            <span class="toggle-nav-icon"></span>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <div class="lang-selection">
+            <ul>
+                <li><a href="/" title="Ελληνικά">ΕΛ</a></li>
+                <li class="current"><a href="/" title="English">EΝ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <script src="{% static "js/scripts.js" %}"></script>
+</body>

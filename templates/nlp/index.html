@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <main>
+        <div class="left-side w-100 w-60-l">
+            <div class="side-inner">
+                <div class="text-source-box">
+                    <div class="text-source-box-inner">
+
+                        <div class="text-source-selection">
+
+                            <div class="select-static-text fl current">
+                                <select>
+                        <option value="false">Select text to analyze....</option>
+                    </select>
+                                <span class="arrow">&#9660;</span>
+                            </div>
+
+
+                            <div class="select-custom-text fr">
+                                <button>Analyze your own text</button>
+                            </div>
+
+                        </div>
+
+                        <textarea class="editor-source static-text-textarea"></textarea>
+                        <textarea class="editor-source custom-text-textarea"></textarea>
+
+                        <div class="actions-row">
+                            <button class="analyze-it">Analyze it</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="results-box text-results">
+                    <div class="rb-inner">
+                        <div class="rb-title">
+                            <span class="box-icon"><span><span><i class="material-icons">insert_drive_file</i></span></span></span>
+                            <h2>Results</h2>
+                            <span class="about-icon">
+                                <span>
+                                    <span>
+                                        <span class="tooltip" data-content="Hover over a token to see it's information"><i class="material-icons">info</i></span>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="rb-content">-</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="right-side w-100 w-40-l">
+            <div class="side-inner">
+
+                <div class="results-box various">
+                    <div class="rb-inner">
+                        <div class="rb-title">
+                            <span class="box-icon"><span><span><i class="material-icons">arrow_forward</i></span></span></span>
+                            <h3>Various</h3>
+                            <span class="about-icon">
+                                <span>
+                                    <span>
+					    <span class="tooltip" data-content="Language identification done via langid.py. Category works only for Greek text"><i class="material-icons">info</i></span>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="rb-content">-</div>
+                    </div>
+                </div>
+                <div class="results-box keywords">
+                    <div class="rb-inner">
+                        <div class="rb-title">
+                            <span class="box-icon"><span><span><i class="material-icons">label</i></span></span></span>
+                            <h3>Keywords</h3>
+                            <span class="about-icon">
+                                <span>
+                                    <span>
+                                        <span class="tooltip" data-content="Keywords Info"><i class="material-icons">info</i></span>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="rb-content">-</div>
+                    </div>
+                </div>
+                <div class="results-box summary">
+                    <div class="rb-inner">
+                        <div class="rb-title">
+                            <span class="box-icon"><span><span><i class="material-icons">short_text</i></span></span></span>
+                            <h3>Summary</h3>
+                            <span class="about-icon">
+                                <span>
+                                    <span>
+                                        <span class="tooltip" data-content="Summary Info"><i class="material-icons">info</i></span>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="rb-content">-</div>
+                    </div>
+                </div>
+                <div class="results-box entities">
+                    <div class="rb-inner">
+                        <div class="rb-title">
+                            <span class="box-icon"><span><span><i class="material-icons">person</i></span></span></span>
+                            <h3>Entities</h3>
+                            <span class="about-icon">
+                                <span>
+                                    <span>
+                                        <span class="tooltip" data-content="Entities Info as Persons, Locations, Organizations"><i class="material-icons">info</i></span>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="rb-content">-</div>
+                    </div>
+                </div>
+                <div class="results-box part-of-speech">
+                    <div class="rb-inner">
+                        <div class="rb-title">
+                            <span class="box-icon"><span><span><i class="material-icons">insert_comment</i></span></span></span>
+                            <h3>Part of Speech</h3>
+                            <span class="about-icon">
+                                <span>
+                                    <span>
+                                        <span class="tooltip" data-content="Part of Speech Info"><i class="material-icons">info</i></span>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="rb-content">-</div>
+                    </div>
+                </div>
+                <div class="results-box tokens">
+                    <div class="rb-inner">
+                        <div class="rb-title">
+                            <span class="box-icon"><span><span><i class="material-icons">text_format</i></span></span></span>
+                            <h3>Tokens</h3>
+                            <span class="about-icon">
+                                <span>
+                                    <span>
+                                        <span class="tooltip" data-content="Tokens Info"><i class="material-icons">info</i></span>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="rb-content">-</div>
+                    </div>
+                </div>
+                <div class="results-box sentences">
+                    <div class="rb-inner">
+                        <div class="rb-title">
+                            <span class="box-icon"><span><span><i class="material-icons">format_quote</i></span></span></span>
+                            <h3>Sentences</h3>
+                            <span class="about-icon">
+                                <span>
+                                    <span>
+                                        <span class="tooltip" data-content="Sentences Info"><i class="material-icons">info</i></span>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="rb-content">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+
+    <div class="loader-container">
+        <div>
+            <div>
+                <div class="loader">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
