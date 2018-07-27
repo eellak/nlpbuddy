@@ -27,7 +27,10 @@ def analyze_text(text):
         ret['text'] = '''
          <span title="POS: DET, LEMMA: Ο">Ο</span> <span style="color:red" title="POS: NOUN, LEMMA: Θησέας">Θησέας</span> <span title="POS: VERB, LEMMA: σκοτώνω">σκότωσε</span> <span title="POS: DET, LEMMA: Ο">το</span> <span style="color:red" title="POS: NOUN, LEMMA: Μινώταυρος">Μινώταυρο</span>
          '''
-        ret['category'] = 'Athletics'
+        if language == 'el':
+            ret['category'] = 'Soon_to_come'
+        else:
+            ret['category'] = ''
 
         try:
             ret['summary'] = summarize(text)
