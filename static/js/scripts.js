@@ -87,7 +87,7 @@ function TextAnalyzerEditor() {
             else{
                 console.warn('Invalid response status', result.status);
             }
-        }, 'POST', txt ) ;
+        }, 'POST', JSON.stringify( { text: txt } ) ) ;
     }
 
     function load_results(type, val) {
