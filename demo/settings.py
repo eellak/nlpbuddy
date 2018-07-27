@@ -154,9 +154,16 @@ import spacy
 # Takes some time to load
 
 LANGUAGE_MODELS = {
-    'Greek': spacy.load('el_core_web_sm'),
-    'Greek-huge': spacy.load('el_core_web_lg'),
-    'English': spacy.load('en_core_web_sm')
+    'el': spacy.load('el_core_web_sm'),
+#    'Greek-huge': spacy.load('el_core_web_lg'),
+    'en': spacy.load('en_core_web_sm')
 }
 
+LANGUAGE_MAPPING = {
+        'el': 'Greek',
+        'en': 'English'
+}
+
+import langid as LANG_ID
+LANG_ID.set_languages(LANGUAGE_MODELS.keys())
 

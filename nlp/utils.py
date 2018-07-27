@@ -6,16 +6,22 @@ ENTITIES_MAPPING = {
     'LOC': 'location',
     'GPE': 'location',
     'ORG':'organization',
-    }
+}
 
+POS_MAPPING = {
+    'NOUN': 'nouns',
+    'VERB': 'verbs',
+    'ADJ': 'adjectives',
+}
 
 def analyze_text(text):
-        # TODO: find language
-        # language = models['
-        lang = settings.LANGUAGE_MODELS['Greek']
+        ret = {}
+
+        language = settings.LANG_ID.classify(text)[0]
+        lang = settings.LANGUAGE_MODELS[language]
         ret = {}
         doc = lang(text)
-        ret['language'] = 'Greek'
+        ret['language'] = settings.LANGUAGE_MAPPING[language]
 
         
         ret['text'] = '''
@@ -23,8 +29,12 @@ def analyze_text(text):
          '''
         ret['category'] = 'Athletics'
 
-        ret['summary'] = summarize(text)
+        try:
+            ret['summary'] = summarize(text)
+        except ValueError: # why does it break?
+            ret['summary'] = ''
         ret['keywords'] =  'σπαθι, δεντρο, χερι'
+        
         # Named Entities
         entities = {label:[] for key, label in ENTITIES_MAPPING.items()}
         for ent in doc.ents:                      
@@ -33,12 +43,19 @@ def analyze_text(text):
                 entities[mapped_entity].append(ent.text)
 
         ret['named_entities'] = entities
-        ret['sentences'] = ['sentence1 goes here', 'sentence xxx goes here']
+#        ret['sentences'] = ['sentence1 goes here', 'sentence xxx goes here']
+        ret['sentences'] = [sentence.text for sentence in doc.sents]
+
+        # TEXT TOKENIZATION
         ret['text_tokenized'] = [token.text for token in doc]
 
-        ret['part_of_speech'] = {
-                           'verbs': ['σκότωσε', 'κολύμπησε'],
-                           'adjectives': ['καλός', 'φοβερός'],
-                           'nouns': ['πρόβατο', 'κεράσι']
-                          }
+        # Parts of Speech
+        part_of_speech = {label:[] for key, label in POS_MAPPING.items()}
+
+        for token in doc:
+            mapped_token = POS_MAPPING.get(token.pos_)
+            if mapped_token and token.text not in part_of_speech[mapped_token]:
+                part_of_speech[mapped_token].append(token.text)
+        ret['part_of_speech'] = part_of_speech
+
         return ret
