@@ -27,7 +27,10 @@ def analyze_text(text):
         analyzed_text = ''
         for token in doc:
             #analyzed_text += '<span title="POS: {0}, LEMMA: {1}, DEP: {2}">{3} </span>'.format(token.pos_, token.lemma_, token.dep_, token.text)
-            analyzed_text += '<span class="tooltip" data-content="POS: {0}<br> LEMMA: {1}<br> DEP: {2}"><i class="material-icons"></i>{3} </span>'.format(token.pos_, token.lemma_, token.dep_, token.text)
+            if token.ent_type_:
+                analyzed_text += '<span class="tooltip" data-content="POS: {0}<br> LEMMA: {1}<br> DEP: {2}" style="color: red;" >{3} </span>'.format(token.pos_, token.lemma_, token.dep_, token.text)
+            else:
+                analyzed_text += '<span class="tooltip" data-content="POS: {0}<br> LEMMA: {1}<br> DEP: {2}" >{3} </span>'.format(token.pos_, token.lemma_, token.dep_, token.text)
 
 
         ret['text'] = analyzed_text
