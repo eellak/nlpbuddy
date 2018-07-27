@@ -25,8 +25,6 @@ SECRET_KEY = 'zty*m5%vhs&odlx&!!_y63p^un(4!_31h5h@*tqt&4!&$rt0c#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -127,7 +125,7 @@ MEDIA_ROOT = BASE_DIR + '/media/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-ALLOWED_HOSTS = ['nlp.wordgames.gr']
+ALLOWED_HOSTS = ['nlp.wordgames.gr', '83.212.72.236']
 
 LOGGING = {
     'version': 1,
@@ -155,15 +153,27 @@ import spacy
 
 LANGUAGE_MODELS = {
     'el': spacy.load('el_core_web_sm'),
-#    'Greek-huge': spacy.load('el_core_web_lg'),
-    'en': spacy.load('en_core_web_sm')
+    'en': spacy.load('en_core_web_sm'),
+    'de': spacy.load('de'),
+    'es': spacy.load('es'),
+    'pt': spacy.load('pt'),
+    'fr': spacy.load('fr'),
+    'it': spacy.load('it'),
+    'nl': spacy.load('nl'),
+    
 }
 
 LANGUAGE_MAPPING = {
         'el': 'Greek',
-        'en': 'English'
+        'en': 'English',
+        'de': 'German',
+        'es': 'Spanish',
+        'pt': 'Portuguese',
+        'fr': 'French',
+        'it': 'Italian',
+        'nl': 'Dutch',
 }
 
 import langid as LANG_ID
 LANG_ID.set_languages(LANGUAGE_MODELS.keys())
-
+DEBUG = False
