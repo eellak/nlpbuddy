@@ -147,22 +147,21 @@ LOGGING = {
 }
 
 import spacy
-# load the two language models. Currently supported languages are 
-# Greek, English
-# Takes some time to load
 
-LANGUAGE_MODELS = {
-    'el': spacy.load('el'),
-    'en': spacy.load('en'),
-    'de': spacy.load('de'),
-    'es': spacy.load('es'),
-    'pt': spacy.load('pt'),
-    'fr': spacy.load('fr'),
-    'it': spacy.load('it'),
-    'nl': spacy.load('nl'),
-    
-}
+# load any spaCy models that are installed
+# this takes some time to load so doing it here and hopefully this improves performance
 
+SUPPORTED_LANGUAGES = ['el', 'en', 'de', 'es', 'pt', 'fr', 'it', 'nl']
+
+LANGUAGE_MODELS = {}
+
+for language in SUPPORTED_LANGUAGES:
+    try:
+        LANGUAGE_MODELS[language] = spacy.load(language)
+    except OSError:
+        pass
+
+# this is used to display the language name
 LANGUAGE_MAPPING = {
         'el': 'Greek',
         'en': 'English',
@@ -174,6 +173,7 @@ LANGUAGE_MAPPING = {
         'nl': 'Dutch',
 }
 
+# this is used for language identification. Loading here to avoid importing many times
 import langid as LANG_ID
 LANG_ID.set_languages(LANGUAGE_MODELS.keys())
 DEBUG = False
