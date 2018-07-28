@@ -1,6 +1,7 @@
-from gensim.summarization import summarize
+from collections import defaultdict
 
 from django.conf import settings
+from gensim.summarization import summarize
 
 ENTITIES_MAPPING = {
     'PERSON': 'person',
@@ -27,7 +28,6 @@ def analyze_text(text):
         # analyzed text containing lemmas, pos and dep. Entities are coloured
         analyzed_text = ''
         for token in doc:
-            #analyzed_text += '<span title="POS: {0}, LEMMA: {1}, DEP: {2}">{3} </span>'.format(token.pos_, token.lemma_, token.dep_, token.text)
             if token.ent_type_:
                 analyzed_text += '<span class="tooltip" data-content="POS: {0}<br> LEMMA: {1}<br> DEP: {2}" style="color: red;" >{3} </span>'.format(token.pos_, token.lemma_, token.dep_, token.text)
             else:
@@ -46,14 +46,13 @@ def analyze_text(text):
         except ValueError: # why does it break in short sentences?
             ret['summary'] = ''
 
-        keywords = []
+        # top 10 most frequent keywords, based on tokens lemmatization
+        frequency = defaultdict(int)
         for token in doc:
-            if not token.is_stop:
-                if token.pos_ in ['VERB', 'ADJ', 'NOUN', 'ADV', 'AUX', 'PROPN']:
-                    keywords.append(token.lemma_)
-        # TODO: ordered dict, show most frequent
-
-        ret['keywords'] =  ', '.join(keywords[:10])
+            if not token.is_stop and token.pos_ in ['VERB', 'ADJ', 'NOUN', 'ADV', 'AUX', 'PROPN']:
+                frequency[token.lemma_] +=1
+        keywords = [keyword for keyword, frequency in sorted(frequency.items(), key=lambda k_v: k_v[1], reverse=True)][:10]
+        ret['keywords'] =  ', '.join(keywords)
 
         # Named Entities
         entities = {label:[] for key, label in ENTITIES_MAPPING.items()}
