@@ -3,3 +3,4 @@ spacy
 django-cors-headers
 rpdb
 uwsgi
+langid
