@@ -21,3 +21,8 @@ Tasks include:
 
 Classifier is built with [FastText](https://fasttext.cc) and is trained in 20.000 articles labeled in these categories.
 
+## Demo
+A working demo can be found on [http://nlp.wordgames.gr](http://nlp.wordgames.gr)
+
+## License
+The code is provided under the GNU AGPL v3.0 License.
