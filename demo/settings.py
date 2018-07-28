@@ -152,8 +152,8 @@ import spacy
 # Takes some time to load
 
 LANGUAGE_MODELS = {
-    'el': spacy.load('el_core_web_sm'),
-    'en': spacy.load('en_core_web_sm'),
+    'el': spacy.load('el'),
+    'en': spacy.load('en'),
     'de': spacy.load('de'),
     'es': spacy.load('es'),
     'pt': spacy.load('pt'),

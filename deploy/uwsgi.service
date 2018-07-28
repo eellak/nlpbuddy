@@ -1,9 +1,9 @@
 [Unit]
-Description=uwsgi nlp.wordgames.gr
+Description=uwsgi nlptest.wordgames.gr
 
 [Service]
 #ExecStart=/opt/demo-app/bin/uwsgi --ini /opt/demo-app/demo/uwsgi.ini
-ExecStart=/data/bin/uwsgi --ini /opt/demo-app/demo/uwsgi.ini
+ExecStart=/usr/local/bin/uwsgi --ini /opt/demo-app/demo/uwsgi.ini
 ExecStop=/usr/bin/killall -9 uwsgi
 RestartSec=3
 Restart=always
