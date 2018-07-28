@@ -28,6 +28,9 @@ Enter text and hit 'Analyze it',
 
 ![alt text](https://raw.githubusercontent.com/eellak/text-analysis/master/static/img/screenshot1.jpg)
 
+## Installation 
+Find instructions here: https://github.com/eellak/text-analysis/wiki/Install
+
 ## License
 The code is provided under the GNU AGPL v3.0 License.
 
