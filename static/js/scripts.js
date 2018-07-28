@@ -1,6 +1,8 @@
+/*global window, ActiveXObject, console, i18n, StaticTexts*/
 var fnc = {
     dom: {
         addClass: function(el, theClass) {
+            'use strict';
             if (el.classList) {
                 el.classList.add(theClass);
             } else {
@@ -8,6 +10,7 @@ var fnc = {
             }
         },
         removeClass: function(el, theClass) {
+            'use strict';
             if (el.classList) {
                 el.classList.remove(theClass);
             } else {
@@ -15,42 +18,40 @@ var fnc = {
             }
         },
         hasClass: function(el, theClass) {
+            'use strict';
             return el.className && new RegExp("(\\s|^)" + theClass + "(\\s|$)").test(el.className);
         },
         toggleClass: function(el, theClass) {
-            return fnc.dom.hasClass(el, theClass) ? fnc.dom.removeClass(el, theClass) : fnc.dom.addClass(el, theClass);
+            'use strict';
+            return this.hasClass(el, theClass) ? this.removeClass(el, theClass) : this.addClass(el, theClass);
+        }
+    },
+    ajax: function(url, callback, requestType, data, x) {
+        'use strict';
+        var ReqObj;
+        try {
+            ReqObj = window.XMLHttpRequest || ActiveXObject;
+            x = new ReqObj('MSXML2.XMLHTTP.3.0');
+            x.open( 'undefined' !== typeof requestType ? requestType : ( data ? 'POST' : 'GET' ), url, 1 );
+            x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            x.onreadystatechange = function () {
+                if( 3 < x.readyState && 'function' === typeof callback ){
+                    callback(x);
+                }
+            };
+            x.send(data);
+        } catch (e) {
+            console.log(e);
         }
     }
 };
 
-/**
- * IE 5.5+, Firefox, Opera, Chrome, Safari XHR object
- *
- * @see [https://gist.github.com/Xeoncross/7663273]{@link https://gist.github.com/Xeoncross/7663273}
- * @param string url
- * @param object callback
- * @param mixed data
- * @param null x
- */
-function fncAjax(url, callback, requestType, data, x) {
-    try {
-        x = new(this.XMLHttpRequest || ActiveXObject)('MSXML2.XMLHTTP.3.0');
-        x.open( 'undefined' !== typeof requestType ? requestType : ( data ? 'POST' : 'GET' ), url, 1 );
-        x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        x.onreadystatechange = function () {
-            x.readyState > 3 && callback && callback(x);
-        };
-        x.send(data);
-    } catch (e) {
-        window.console && console.log(e);
-    }
-}
-
 function TextAnalyzerEditor() {
-    "use strict";
+    'use strict';
 
-    var ins = this;
+    var k, g, cntr, defVal, randm,
+        ins = this;
 
     this.elem = {
         body: document.querySelector('body'),
@@ -78,7 +79,7 @@ function TextAnalyzerEditor() {
 
         displayLoader();
 
-        fncAjax( '/api/analyze', function(result){
+        fnc.ajax( '/api/analyze', function(result){
             if( 200 === result.status ){
                 if( 'function' === typeof callback ){
                     callback( 'string' === typeof result.response ? JSON.parse( result.response ) : result.response );
@@ -87,7 +88,7 @@ function TextAnalyzerEditor() {
             else{
                 console.warn('Invalid response status', result.status);
             }
-        }, 'POST', txt ) ;
+        }, 'POST', txt );
     }
 
     function load_results(type, val) {
@@ -236,8 +237,12 @@ function TextAnalyzerEditor() {
         if ('false' === this.value || (ins.states.selectedCustomText === this.value && ! ins.states.customText) ) {
             return;
         }
-        ins.states.selectedCustomText = this.value;
-        ins.elem.staticTextEditor.value = StaticTexts[this.value].content;
+        after_select_text(this.value);
+    }
+
+    function after_select_text(val){
+        ins.states.selectedCustomText = val;
+        ins.elem.staticTextEditor.value = StaticTexts[val].content;
         ins.states.customText = !1;
         on_textSelect();
     }
@@ -279,28 +284,46 @@ function TextAnalyzerEditor() {
     this.elem.selectCustomTextBtn.addEventListener('click', onselect_customText);
     this.elem.toggleNav.addEventListener('click', onclick_toggleNav);
 
-    var k, g;
+    randm = Math.floor( Math.random() * Object.keys(StaticTexts).length );
 
+    // Append in select options the static texts.
+    cntr = 0;
     for (k in StaticTexts) {
         if (StaticTexts.hasOwnProperty(k)) {
+            defVal = cntr === randm ? k : defVal;
             g = document.createElement('option');
             g.value = k;
             g.innerHTML = StaticTexts[k].title;
             this.elem.selectText.appendChild(g);
         }
+        cntr+=1;
     }
+
+    // Analyzes one of available static texts (randomly selected).
+    setTimeout(function(ins){
+        ins.elem.selectText.selectedIndex = defVal;
+        after_select_text(defVal);
+        setTimeout(function(){
+            ins.elem.analyzeBtn.click();
+        }, 1000);
+    }, 1000, this);
+}
+
+function randomInt(min, max) {
+    'use strict';
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 var tooltipElementInstance = null;
 
 function TooltipElement(){
-    "use strict";
+    'use strict';
 
     this.element = null;
 
     (function(ins){
 
-        var x, ttInner, ttContent;
+        var ttInner, ttContent;
 
         ins.element = document.createElement('div');
         ins.element.setAttribute('class', 'tooltip-container');
@@ -326,7 +349,8 @@ function TooltipElement(){
     })(this);
 }
 
-function mouseenter_tooltip_trigger(ev){
+function mouseenter_tooltip_trigger(){
+    'use strict';
     var clientRect, winWidth, tooltipContainerWidth = 200, content = this.getAttribute('data-content');
     content = content.trim() || '';
     if( '' !== content ){
@@ -335,9 +359,6 @@ function mouseenter_tooltip_trigger(ev){
             tooltipElementInstance.newContent(content);
             clientRect = this.getBoundingClientRect();
             winWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
-            // console.log( clientRect, winWidth, clientRect.left, clientRect.width, tooltipContainerWidth);
-
             if( winWidth < ( clientRect.left + ( clientRect.width / 2 ) + ( tooltipContainerWidth / 2 ) ) ){
                 fnc.dom.addClass( tooltipElementInstance.element, 'from-right' );
                 fnc.dom.removeClass( tooltipElementInstance.element, 'from-left' );
@@ -356,6 +377,7 @@ function mouseenter_tooltip_trigger(ev){
 }
 
 function initTooltips( tt ){
+    'use strict';
     var i;
     if( tt.length ){
         i=0;
@@ -367,8 +389,10 @@ function initTooltips( tt ){
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    "use strict";
+function onDOMContentLoaded(){
+    'use strict';
     new TextAnalyzerEditor();
     initTooltips( document.querySelectorAll('.tooltip') );
-});
+}
+
+document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
