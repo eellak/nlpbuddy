@@ -1,16 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Open Source Text Analysis</h1>
+
+    <main>
+            <div class="left-side w-100 w-60-l">
+
+
+<h1>About</h1>
 <p>
 This is a text analysis application, capable of performing common NLP tasks through the API and a web dashboard. 
 
-<br>It has been created as part of the GSOC 2018 project of adding Greek support to spaCy.io by Giannis Daras and released as open source package. 
+<br>It has been created as part of the GSOC 2018 project of "adding Greek support to spaCy.io" and released as open source package - <a href=https://github.com/eellak/text-analysis">https://github.com/eellak/text-analysis</a>
 <br>
 <br>
-We've added the Greek language on this analysis tool, plus other languages that spaCy.io supports, these are English, German, Italian, French, Dutch, Spanish and Portoguese, 
+Text analysis is performed through <a href="https://spacy.io">spaCy.io</a> NLP framework, supported languages are: Greek, English, German, Italian, French, Dutch, Spanish and Portoguese.
 </p>
-NLP tasks are performed through spaCy.io NLP framework. Web application used is Django. 
-<br>For text summarization we use gensim's implementation of the TextRank algorithm. 
+The web application we've used is Django.
+<br>For text summarization we use <a href="https://github.com/RaRe-Technologies/gensim">gensim's</a> implementation of the TextRank algorithm. 
 <br>
 The Greek language support contains a text classifier that we've built with FastText. 
 <br>It is trained in 20.000 articles labeled in the following categories:
@@ -20,13 +25,15 @@ The Greek language support contains a text classifier that we've built with Fast
 
 <br>
 <p>
-Created by:
+<h2>Created by:</h2>
 <br>
-NLP: Markos Gogoulos (mgogoulos@mist.io) and Giannis Daras (daras.giannhs@gmail.com)
+Markos Gogoulos (mgogoulos@mist.io): NLP + Backend code
 <br>
-Backend code: Markos Gogoulos (mgogoulos@mist.io) and Giannis Daras (daras.giannhs@gmail.com)
+Giannis Daras (daras.giannhs@gmail.com): NLP + Backend code
 <br>
-Frontend code: Giannis Stergiou (jiannst@gmail.com)
+Giannis Stergiou (jiannst@gmail.com): Frontend code + design
 
+        </div>
+	    </main>
 
     {% endblock %}
