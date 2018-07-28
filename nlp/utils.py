@@ -18,12 +18,13 @@ POS_MAPPING = {
 def analyze_text(text):
         ret = {}
 
+        # language identification
         language = settings.LANG_ID.classify(text)[0]
         lang = settings.LANGUAGE_MODELS[language]
         ret = {}
         doc = lang(text)
         ret['language'] = settings.LANGUAGE_MAPPING[language]
-
+        # analyzed text containing lemmas, pos and dep. Entities are coloured
         analyzed_text = ''
         for token in doc:
             #analyzed_text += '<span title="POS: {0}, LEMMA: {1}, DEP: {2}">{3} </span>'.format(token.pos_, token.lemma_, token.dep_, token.text)
@@ -32,9 +33,9 @@ def analyze_text(text):
             else:
                 analyzed_text += '<span class="tooltip" data-content="POS: {0}<br> LEMMA: {1}<br> DEP: {2}" >{3} </span>'.format(token.pos_, token.lemma_, token.dep_, token.text)
 
-
         ret['text'] = analyzed_text
 
+        # TODO: add classifier for the Greek language
         if language == 'el':
             ret['category'] = 'Soon_to_come'
         else:
@@ -42,7 +43,7 @@ def analyze_text(text):
 
         try:
             ret['summary'] = summarize(text)
-        except ValueError: # why does it break?
+        except ValueError: # why does it break in short sentences?
             ret['summary'] = ''
 
         keywords = []
@@ -61,11 +62,11 @@ def analyze_text(text):
             if mapped_entity and ent.text not in entities[mapped_entity]:
                 entities[mapped_entity].append(ent.text)
 
+        # Sentences splitting
         ret['named_entities'] = entities
-#        ret['sentences'] = ['sentence1 goes here', 'sentence xxx goes here']
         ret['sentences'] = [sentence.text for sentence in doc.sents]
 
-        # TEXT TOKENIZATION
+        # Text tokenization
         ret['text_tokenized'] = [token.text for token in doc]
 
         # Parts of Speech
