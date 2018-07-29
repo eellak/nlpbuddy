@@ -67,10 +67,12 @@ def analyze_text(text):
 
         # Named Entities
         entities = {label:[] for key, label in ENTITIES_MAPPING.items()}
-        for ent in doc.ents:                      
-            mapped_entity = ENTITIES_MAPPING.get(ent.label_)
-            if mapped_entity and ent.text not in entities[mapped_entity]:
-                entities[mapped_entity].append(ent.text)
+        for ent in doc.ents:
+            # noticed that these are found some times 
+            if ent.text not in ['\n', '', ' ', '.', ',', '-', '–', '_']:
+                mapped_entity = ENTITIES_MAPPING.get(ent.label_)
+                if mapped_entity and ent.text not in entities[mapped_entity]:
+                    entities[mapped_entity].append(ent.text)
 
         # Sentences splitting
         ret['named_entities'] = entities
