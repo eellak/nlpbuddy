@@ -46,12 +46,12 @@ def analyze_text(text):
         ret['text'] = analyzed_text
 
         # Text category. Only valid for Greek text for now
-        ret['category'] = ''
+        ret['category'] = 'Valid only for Greek lang'
         if language == 'el':
             try:
                 ret['category'] = predict_category(text, language)
             except:
-                pass
+                ret['category'] = '-'
         try:
             ret['summary'] = summarize(text)
         except ValueError: # why does it break in short sentences?
@@ -68,7 +68,7 @@ def analyze_text(text):
         # Named Entities
         entities = {label:[] for key, label in ENTITIES_MAPPING.items()}
         for ent in doc.ents:
-            # noticed that these are found some times 
+            # noticed that these are found some times
             if ent.text not in ['\n', '', ' ', '.', ',', '-', '–', '_']:
                 mapped_entity = ENTITIES_MAPPING.get(ent.label_)
                 if mapped_entity and ent.text not in entities[mapped_entity]:
