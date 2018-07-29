@@ -159,7 +159,7 @@ for language in SUPPORTED_LANGUAGES:
     try:
         LANGUAGE_MODELS[language] = spacy.load(language)
     except OSError:
-        pass
+        print('Warning: model {} not found. Run python3 -m spacy download {} and try again.'.format(language,language))
 
 # this is used to display the language name
 LANGUAGE_MAPPING = {
