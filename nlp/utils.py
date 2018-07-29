@@ -1,7 +1,17 @@
+import os
+import sys
+import tempfile
+from subprocess import check_output
 from collections import defaultdict
 
 from django.conf import settings
 from gensim.summarization import summarize
+
+fasttext_path = '/opt/demo-app/fastText/fasttext'
+
+MODEL_MAPPING = {
+    'el': '/opt/demo-app/demo/el_classiffier.bin'
+}
 
 ENTITIES_MAPPING = {
     'PERSON': 'person',
@@ -35,12 +45,13 @@ def analyze_text(text):
 
         ret['text'] = analyzed_text
 
-        # TODO: add classifier for the Greek language
+        # Text category. Only valid for Greek text for now
+        ret['category'] = ''
         if language == 'el':
-            ret['category'] = 'Soon_to_come'
-        else:
-            ret['category'] = ''
-
+            try:
+                ret['category'] = predict_category(text, language)
+            except:
+                pass
         try:
             ret['summary'] = summarize(text)
         except ValueError: # why does it break in short sentences?
@@ -78,3 +89,25 @@ def analyze_text(text):
         ret['part_of_speech'] = part_of_speech
 
         return ret
+
+
+def predict_category(text, language):
+    "Loads FastText models and predicts category"
+    text = text.lower().replace('\n', ' ')
+    # fastText expects a file here
+    fp = tempfile.NamedTemporaryFile(delete=False)
+    fp.write(str.encode(text))
+    fp.close()
+
+    model = MODEL_MAPPING[language]
+    cmd = [fasttext_path, 'predict', model, fp.name]
+    result = check_output(cmd).decode("utf-8")
+    category  = result.split('__label__')[1]
+
+    # remove file
+    try:
+        os.remove(fp.name)
+    except:
+        pass
+
+    return category

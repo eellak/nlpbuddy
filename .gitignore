@@ -7,3 +7,4 @@
 __pycache__/
 debug.log
 errorlog.txt
+db.sqlite3
