@@ -28,6 +28,9 @@ Enter text and hit 'Analyze it',
 
 ![alt text](https://raw.githubusercontent.com/eellak/text-analysis/master/static/img/screenshot1.jpg)
 
+## API Usage
+[https://github.com/eellak/text-analysis/wiki/API-usage](https://github.com/eellak/text-analysis/wiki/API-usage)
+
 ## Installation 
 Find development and deployment instructions here: https://github.com/eellak/text-analysis/wiki/Install
 
