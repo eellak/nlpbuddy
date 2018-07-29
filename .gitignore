@@ -8,3 +8,8 @@ __pycache__/
 debug.log
 errorlog.txt
 db.sqlite3
+el_classiffier.bin
+uwsgi.ini
+demo/settings.py
+settings.py
+
