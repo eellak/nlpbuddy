@@ -46,12 +46,12 @@ def analyze_text(text):
         ret['text'] = analyzed_text
 
         # Text category. Only valid for Greek text for now
-        ret['category'] = 'Valid only for Greek lang'
         if language == 'el':
             try:
                 ret['category'] = predict_category(text, language)
             except:
-                ret['category'] = '-'
+                pass
+
         try:
             ret['summary'] = summarize(text)
         except ValueError: # why does it break in short sentences?
