@@ -174,7 +174,7 @@ function TextAnalyzerEditor() {
             else{
 
                 console.warn('Invalid response status', result.status);
-				hideLoader();
+                hideLoader();
 
             }
 
@@ -477,7 +477,9 @@ function TextAnalyzerEditor() {
         }
 
         after_select_text(this.value);
-
+        setTimeout(function(){
+            ins.elem.analyzeBtn.click();
+        }, 100);
     }
 
 
