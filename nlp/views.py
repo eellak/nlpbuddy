@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from django.http import JsonResponse
 from .utils import analyze_text
@@ -16,21 +18,23 @@ def about(request):
 def analyze(request):
     'API text analyze view'
     if request.method == 'POST':
-        text = request.POST.get("text", "")
-        # TODO: will remove once js sends text as expected
-        if not text:
+        text = request.body.decode('utf-8')
+        try:
+            text = json.loads(text)['text']
+        except ValueError:
+            # catch POST form as well            
             for key in request.POST.dict().keys():
                 text = key
+
+        if not text:
+            response = JsonResponse({'status':'false','message':'need some text here!'})
+            response.status_code = 400
+            return response
+
         # add some limit here
         text = text[:200000]
         ret = {}
         ret = analyze_text(text)
-
-        if not text:
-            response = JsonResponse({'status':'false','message':'need some text here!'})
-            response.status_code = 500
-            return response
-
         return JsonResponse(ret)
     else:
         ret = {'methods_allowed': 'POST'}
