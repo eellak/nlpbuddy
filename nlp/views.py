@@ -1,8 +1,18 @@
 import json
 
+import requests
+from bs4 import BeautifulSoup
+from readability import Document
+
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.conf import settings
 from .utils import analyze_text
+
+if settings.ALLOW_URL_IMPORTS:
+    import requests
+    from bs4 import BeautifulSoup
+    from readability import Document
 
 def index(request):
     'Index view'
@@ -25,6 +35,14 @@ def analyze(request):
             # catch POST form as well            
             for key in request.POST.dict().keys():
                 text = key
+
+        if settings.ALLOW_URL_IMPORTS and text.startswith(('http://', 'https://', 'www')):
+            page = requests.get(text)
+            doc = Document(page.text)
+            soup = BeautifulSoup(doc.summary())
+            text = soup.get_text()
+            title = doc.title().strip()
+            text = '{0}.\n{1}'.format(title, text)
 
         if not text:
             response = JsonResponse({'status':'false','message':'need some text here!'})
