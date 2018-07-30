@@ -1,7 +1,9 @@
 Django
 spacy
 django-cors-headers
-rpdb
 uwsgi
 langid
 gensim
+requests
+readability-lxml
+bs4
