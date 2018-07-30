@@ -93,96 +93,52 @@ var fnc = {
 
 };
 
-
-
 function TextAnalyzerEditor() {
 
     'use strict';
 
+    var k, g, cntr, defVal, randm, lastResult,
 
-
-    var k, g, cntr, defVal, randm,
-
-        ins = this;
-
-
+    ins = this;
 
     this.elem = {
-
         body: document.querySelector('body'),
-
         analyzeBtn: document.querySelector('.analyze-it'),
-
         selectText: document.querySelector('.select-static-text select'),
-
         selectCustomTextBtn: document.querySelector('.select-custom-text button'),
-
         staticTextEditor: document.querySelector('textarea.static-text-textarea'),
-
-        customTextEditor: document.querySelector('textarea.custom-text-textarea')
-
+        customTextEditor: document.querySelector('textarea.custom-text-textarea'),
+        lemmatizeSentencesCheck: document.querySelector('input.lemmatize-sentences')
     };
 
-
-
     if (!this.elem.analyzeBtn || !this.elem.selectText || !this.elem.selectCustomTextBtn || !this.elem.staticTextEditor || !this.elem.customTextEditor) {
-
         console.error('Missing analyzer components, ', this.elem.analyzeBtn, this.elem.selectText, this.elem.selectCustomTextBtn, this.elem.staticTextEditor, this.elem.customTextEditor);
-
         return;
-
     }
-
-
 
     function displayLoader() {
-
         fnc.dom.addClass(ins.elem.body, 'is-loading');
-
     }
-
-
 
     function hideLoader() {
-
         fnc.dom.removeClass(ins.elem.body, 'is-loading');
-
     }
 
-
-
     function requestTextAnalysis(txt, callback) {
-
-
-
         displayLoader();
-
-
-
         fnc.postJsonAjax( '/api/analyze', function(result){
-
             if( 200 === result.status ){
-
                 if( 'function' === typeof callback ){
-
                     callback( 'string' === typeof result.response ? JSON.parse( result.response ) : result.response );
-
                 }
-
             }
-
             else{
-
                 console.warn('Invalid response status', result.status);
                 hideLoader();
-
             }
 
         }, { text: txt } );
-
     }
-
-
 
     function load_results(type, val) {
 
@@ -191,289 +147,160 @@ function TextAnalyzerEditor() {
         switch (type) {
 
             case 'text':
-
                 ins.elem.boxes.resultsContent.innerHTML = val;
-
                 break;
-
             case 'summary':
-
                 ins.elem.boxes.summaryContent.innerHTML = val;
-
                 break;
-
             case 'various':
-
                 w = 'undefined' !== typeof val.language ? '<li><label>' + i18n.Languague + ':</label>' + val.language + '</li>' : '';
-
                 w += 'undefined' !== typeof val.category ? '<li><label>' + i18n.Category + ':</label>' + val.category + '</li>' : '';
-
                 w = '' === w ? w : '<ul>' + w + '</ul>';
-
                 ins.elem.boxes.variousContent.innerHTML = w;
-
                 break;
-
             case 'entities':
-
                 w = '';
-
                 if ('undefined' !== typeof val.person && val.person.length) {
-
                     d = '';
-
                     i = 0;
-
                     while (i < val.person.length) {
-
                         d += '<span>' + val.person[i] + '</span>';
-
                         i += 1;
-
                     }
-
                     w += '<li><label>' + i18n.Person + '</label><div class="person">' + d + '</div></li>';
-
                 }
 
                 if ('undefined' !== typeof val.location && val.location.length) {
 
                     d = '';
-
                     i = 0;
-
                     while (i < val.location.length) {
-
                         d += '<span>' + val.location[i] + '</span>';
-
                         i += 1;
-
                     }
 
                     w += '<li><label>' + i18n.Location + '</label><div class="location">' + d + '</div></li>';
-
                 }
 
                 if ('undefined' !== typeof val.organization && val.organization.length) {
-
                     d = '';
-
                     i = 0;
-
                     while (i < val.organization.length) {
-
                         d += '<span>' + val.organization[i] + '</span>';
-
                         i += 1;
-
                     }
-
                     w += '<li><label>' + i18n.Organization + '</label><div class="organization">' + d + '</div></li>';
-
                 }
 
-
-
                 w = '' === w ? w : '<ul>' + w + '</ul>';
-
                 ins.elem.boxes.entitiesContent.innerHTML = w;
-
                 break;
-
             case 'part_of_speech':
-
                 w = '';
-
                 if ('undefined' !== typeof val.verbs && val.verbs.length) {
-
                     d = '';
-
                     i = 0;
-
                     while (i < val.verbs.length) {
-
                         d += '<span>' + val.verbs[i] + '</span>';
-
                         i += 1;
-
                     }
-
                     w += '<li><label>' + i18n.Verbs + '</label><div class="verbs">' + d + '</div></li>';
-
                 }
 
                 if ('undefined' !== typeof val.adjectives && val.adjectives.length) {
-
                     d = '';
-
                     i = 0;
-
                     while (i < val.adjectives.length) {
-
                         d += '<span>' + val.adjectives[i] + '</span>';
-
                         i += 1;
-
                     }
-
                     w += '<li><label>' + i18n.Adjectives + '</label><div class="adjectives">' + d + '</div></li>';
-
                 }
 
                 if ('undefined' !== typeof val.nouns && val.nouns.length) {
-
                     d = '';
-
                     i = 0;
-
                     while (i < val.nouns.length) {
-
                         d += '<span>' + val.nouns[i] + '</span>';
-
                         i += 1;
-
                     }
-
                     w += '<li><label>' + i18n.Nouns + '</label><div class="nouns">' + d + '</div></li>';
 
                 }
 
-
-
                 w = '' === w ? w : '<ul>' + w + '</ul>';
 
                 ins.elem.boxes.partOfSpeechContent.innerHTML = w;
-
                 break;
-
             case 'keywords':
-
                 w = '';
-
                 i = 0;
-
                 while (i < val.length) {
-
                     w += '<span>' + val[i].trim() + '</span>';
-
                     i += 1;
-
                 }
-
                 ins.elem.boxes.keywordsContent.innerHTML = w;
-
                 break;
-
             case 'tokens':
-
                 w = '';
-
                 i = 0;
-
                 while (i < val.length) {
-
                     w += '<span>' + val[i].trim() + '</span>';
-
                     i += 1;
-
                 }
-
                 ins.elem.boxes.tokensContent.innerHTML = w;
-
                 break;
-
             case 'sentences':
-
                 w = '';
-
                 i = 0;
-
                 while (i < val.length) {
-
                     w += '<li>' + val[i].trim() + '</li>';
-
                     i += 1;
-
                 }
-
                 w = '' === w ? w : '<ol>' + w + '</ol>';
-
                 ins.elem.boxes.sentencesContent.innerHTML = w;
-
                 break;
 
         }
-
     }
 
-
-
     function responseTextAnalysis(result) {
-
         load_results('text', result.text || '');
-
         load_results('various', { language: result.language, category: result.category });
-
         load_results('keywords', result.keywords && ( '' !== result.keywords ? result.keywords.split(',') : [] ) );
-
         load_results('summary', result.summary || '');
-
         load_results('entities', result.named_entities);
-
         load_results('part_of_speech', result.part_of_speech);
-
         load_results('tokens', result.text_tokenized || []);
 
-        load_results('sentences', result.sentences);
-
-
+        load_results('sentences', result[ ins.states.lemmatizedSentences ? 'lemmatized_sentences' : 'sentences' ] );
 
         fnc.dom.addClass(ins.elem.body, 'has-results');
 
-
-
         if( result.text && '' !== result.text ){
-
             initTooltips( document.querySelector('.results-box.text-results').querySelectorAll('.tooltip') );
-
         }
-
-
 
         hideLoader();
 
+        lastResult = result;
     }
-
-
 
     function on_textSelect() {
-
         fnc.dom[ins.states.customText ? 'addClass' : 'removeClass'](ins.elem.body, 'with-custom-text-editor');
-
     }
-
-
 
     function onclick_analyzeIt() {
-
         var analyzeTxt = ins.elem[ins.states.customText ? 'customTextEditor' : 'staticTextEditor'].value.trim();
-
         if (2 < analyzeTxt.length) {
-
             requestTextAnalysis(analyzeTxt, responseTextAnalysis);
-
         }
-
     }
-
-
 
     function onselect_staticText() {
 
         if ('false' === this.value || (ins.states.selectedCustomText === this.value && ! ins.states.customText) ) {
-
             return;
-
         }
 
         after_select_text(this.value);
@@ -482,159 +309,92 @@ function TextAnalyzerEditor() {
         }, 100);
     }
 
-
-
     function after_select_text(val){
-
         ins.states.selectedCustomText = val;
-
         ins.elem.staticTextEditor.value = StaticTexts[val].content;
-
         ins.states.customText = !1;
-
         on_textSelect();
-
     }
-
-
 
     function onselect_customText() {
-
         if (!0 === ins.states.customText) {
-
             return;
-
         }
-
         ins.states.customText = !0;
-
         on_textSelect();
-
     }
-
-
 
     function onclick_toggleNav(){
-
         fnc.dom.toggleClass(ins.elem.body, 'vis-mobile-nav');
-
     }
 
-
+    function onclick_lemmatizeSentences(){
+        ins.states.lemmatizedSentences = ! ins.states.lemmatizedSentences;
+        load_results('sentences', lastResult[ ins.states.lemmatizedSentences ? 'lemmatized_sentences' : 'sentences' ] );
+    }
 
     this.elem.toggleNav = document.querySelector('.toggle-nav');
-
     this.elem.staticTextWrap = document.querySelector('.select-static-text');
-
     this.elem.customTextWrap = document.querySelector('.select-custom-text');
 
-
-
     this.elem.boxes = {
-
         resultsContent: document.querySelector('.results-box.text-results .rb-content'),
-
         variousContent: document.querySelector('.results-box.various .rb-content'),
-
         keywordsContent: document.querySelector('.results-box.keywords .rb-content'),
-
         summaryContent: document.querySelector('.results-box.summary .rb-content'),
-
         entitiesContent: document.querySelector('.results-box.entities .rb-content'),
-
         partOfSpeechContent: document.querySelector('.results-box.part-of-speech .rb-content'),
-
         tokensContent: document.querySelector('.results-box.tokens .rb-content'),
-
         sentencesContent: document.querySelector('.results-box.sentences .rb-content')
-
     };
-
-
 
     this.states = {
-
         customText: !1,
-
-        selectedCustomText: null
-
+        selectedCustomText: null,
+        lemmatizedSentences: this.elem.lemmatizeSentencesCheck.checked
     };
 
-
-
     this.elem.analyzeBtn.addEventListener('click', onclick_analyzeIt);
-
     this.elem.selectText.addEventListener('change', onselect_staticText);
-
     this.elem.selectCustomTextBtn.addEventListener('click', onselect_customText);
-
     this.elem.toggleNav.addEventListener('click', onclick_toggleNav);
-
-
+    this.elem.lemmatizeSentencesCheck.addEventListener('click', onclick_lemmatizeSentences);
 
     randm = Math.floor( Math.random() * Object.keys(StaticTexts).length );
-
-
 
     // Append in select options the static texts.
 
     cntr = 0;
-
     for (k in StaticTexts) {
-
         if (StaticTexts.hasOwnProperty(k)) {
-
             defVal = cntr === randm ? k : defVal;
-
             g = document.createElement('option');
-
             g.value = k;
-
             g.innerHTML = StaticTexts[k].title;
-
             this.elem.selectText.appendChild(g);
-
         }
-
         cntr+=1;
-
     }
-
-
 
     // Analyzes one of available static texts (randomly selected).
 
     setTimeout(function(ins){
-
         ins.elem.selectText.selectedIndex = defVal;
-
         after_select_text(defVal);
-
         setTimeout(function(){
-
             ins.elem.analyzeBtn.click();
-
         }, 1000);
-
     }, 1000, this);
-
 }
-
-
 
 function randomInt(min, max) {
 
     'use strict';
 
     return Math.floor(Math.random() * (max - min + 1)) + min;
-
 }
 
-
-
 var tooltipElementInstance = null;
-
-
 
 function TooltipElement(){
 
@@ -697,10 +457,7 @@ function TooltipElement(){
 
 
     })(this);
-
 }
-
-
 
 function mouseenter_tooltip_trigger(){
 
@@ -751,10 +508,7 @@ function mouseenter_tooltip_trigger(){
         }
 
     }
-
 }
-
-
 
 function initTooltips( tt ){
 
@@ -777,10 +531,7 @@ function initTooltips( tt ){
         }
 
     }
-
 }
-
-
 
 function onDOMContentLoaded(){
 
@@ -789,9 +540,6 @@ function onDOMContentLoaded(){
     new TextAnalyzerEditor();
 
     initTooltips( document.querySelectorAll('.tooltip') );
-
 }
-
-
 
 document.addEventListener('DOMContentLoaded', onDOMContentLoaded);

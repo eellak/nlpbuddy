@@ -334,6 +334,39 @@ main {
 .results-box .rb-title h3 {
   font-size: 0.9375em;
 }
+.results-box .rb-title .box-icon > span,
+.results-box .rb-title .about-icon > span,
+.results-box .rb-title .toggle-option > span {
+  width: 100%;
+  height: 100%;
+  display: table;
+  text-align: center;
+}
+.results-box .rb-title .box-icon > span > span,
+.results-box .rb-title .about-icon > span > span,
+.results-box .rb-title .toggle-option > span > span {
+  display: table-cell;
+  vertical-align: middle;
+}
+.results-box .rb-title .toggle-option {
+  position: absolute;
+  top: 0;
+  right: 2.2rem;
+  display: inline-block;
+  min-width: 3rem;
+  width: auto;
+  height: 100%;
+  border-right: 1px solid #ddd;
+}
+.results-box .rb-title .toggle-option label {
+  line-height: 1;
+  font-size: 0.875em;
+  font-weight: 500;
+  cursor: pointer;
+}
+.results-box .rb-title .toggle-option input {
+  margin: 0 0.6rem;
+}
 .results-box .rb-title .box-icon,
 .results-box .rb-title .about-icon {
   position: absolute;
@@ -351,18 +384,6 @@ main {
       display:block;
       background-color:#f1f1f1;
   } */
-}
-.results-box .rb-title .box-icon > span,
-.results-box .rb-title .about-icon > span {
-  width: 100%;
-  height: 100%;
-  display: table;
-  text-align: center;
-}
-.results-box .rb-title .box-icon > span > span,
-.results-box .rb-title .about-icon > span > span {
-  display: table-cell;
-  vertical-align: middle;
 }
 .results-box .rb-title .box-icon i,
 .results-box .rb-title .about-icon i {
@@ -455,6 +476,9 @@ main {
 }
 .results-box:not(.text-results).keywords .rb-content span {
   background-color: MediumPurple;
+}
+.results-box:not(.text-results).summary .rb-content {
+  line-height: 1.4;
 }
 .results-box:not(.text-results).entities .rb-content .person span {
   background-color: Sienna;
@@ -758,5 +782,5 @@ body.is-loading .loader-container {
 }
 
 .results-box.text-results .rb-content .tooltip:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
 }
