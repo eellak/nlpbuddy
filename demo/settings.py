@@ -125,7 +125,7 @@ MEDIA_ROOT = BASE_DIR + '/media/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-ALLOWED_HOSTS = ['nlp.wordgames.gr', '83.212.72.236']
+ALLOWED_HOSTS = ['nlp.wordgames.gr', 'localhost']
 
 LOGGING = {
     'version': 1,
@@ -177,3 +177,10 @@ LANGUAGE_MAPPING = {
 import langid as LANG_ID
 LANG_ID.set_languages(LANGUAGE_MODELS.keys())
 DEBUG = False
+
+
+# whether to allow to import text from URLs
+# library python-readability fetches text from a URL 
+# and BeautifulSoup parses/removes tags
+ALLOW_URL_IMPORTS = True
+
