@@ -69,14 +69,17 @@ def analyze_text(text):
         entities = {label:[] for key, label in ENTITIES_MAPPING.items()}
         for ent in doc.ents:
             # noticed that these are found some times
-            if ent.text not in ['\n', '', ' ', '.', ',', '-', '–', '_']:
+            if ent.text.strip() not in ['\n', '', ' ', '.', ',', '-', '–', '_']:
                 mapped_entity = ENTITIES_MAPPING.get(ent.label_)
                 if mapped_entity and ent.text not in entities[mapped_entity]:
                     entities[mapped_entity].append(ent.text)
+        ret['named_entities'] = entities
 
         # Sentences splitting
-        ret['named_entities'] = entities
         ret['sentences'] = [sentence.text for sentence in doc.sents]
+      
+        # Lemmatized sentences splitting 
+        ret['lemmatized_sentences'] = [sentence.lemma_ for sentence in doc.sents]
 
         # Text tokenization
         ret['text_tokenized'] = [token.text for token in doc]
