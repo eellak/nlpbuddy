@@ -60,9 +60,9 @@ header .logo h1 a {
   text-decoration: none;
   color: #fff;
 }
-header .logo h1 a:hover {
+/* header .logo h1 a:hover {
   color: #ccc;
-}
+} */
 @media screen and (min-width: 30rem) {
   header .logo h1 {
     font-size: 1.45em;
@@ -105,8 +105,11 @@ header .lang-selection ul li.current a {
 header .main-nav {
   padding-left: 0.8rem;
   border-left: 1px solid rgba(255, 255, 255, 0.15);
+  line-height: 8rem;
   /* display: inline-block; */
 }
+
+
 header .main-nav ul {
   margin: 0;
   padding: 0;
