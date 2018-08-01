@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block scripts %}
+<script>
+var displacy = new displaCy('/visualize', {
+    container: '#displacy',
+    format: 'spacy',
+    distance: 300,
+    offsetX: 100
+})
+var markup = {{json|safe}}
+
+displacy.render(markup,{
+  container : '#displacy',
+  format : 'google',
+  distance : '5px',
+  arrowSpacing : '5px',
+  wordSpacing: '10px'
+});
+
+
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div id="displacy">
+</div>
+{% endblock %}
