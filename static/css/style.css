@@ -339,6 +339,7 @@ main {
 }
 .results-box .rb-title .box-icon > span,
 .results-box .rb-title .about-icon > span,
+.results-box .rb-title .visualize-btn > span,
 .results-box .rb-title .toggle-option > span {
   width: 100%;
   height: 100%;
@@ -347,9 +348,21 @@ main {
 }
 .results-box .rb-title .box-icon > span > span,
 .results-box .rb-title .about-icon > span > span,
+.results-box .rb-title .visualize-btn > span > span,
 .results-box .rb-title .toggle-option > span > span {
   display: table-cell;
   vertical-align: middle;
+}
+
+
+.results-box .rb-title .visualize-btn {
+  position: absolute;
+  top: 0;
+  right: 10rem;
+  display: inline-block;
+  min-width: 3rem;
+  width: auto;
+  height: 100%;
 }
 .results-box .rb-title .toggle-option {
   position: absolute;
