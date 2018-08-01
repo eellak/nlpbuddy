@@ -254,7 +254,7 @@ function TextAnalyzerEditor() {
                 w = '';
                 i = 0;
                 while (i < val.length) {
-                    w += '<li>' + val[i].trim() + '</li>';
+                    w += '<li style="list-style-type: none;"> <input checked style="margin-right:1rem" type="radio" value="'+ val[i].trim()+'" name=sentences' + '>' + val[i].trim() + '</input> </li>';
                     i += 1;
                 }
                 w = '' === w ? w : '<ol>' + w + '</ol>';
