@@ -52,27 +52,28 @@
             </div>
 
             <div class="results-box sentences">
-                <div class="rb-inner">
-                    <div class="rb-title">
-                        <span class="box-icon"><span><span><i class="material-icons">format_quote</i></span></span></span>
-                        <h3>Sentences</h3>
-						<span class="toggle-option">
-							<span>
-								<span>
-									<label>Lemmatized<input type="checkbox" class="lemmatize-sentences" /></label>
-								</span>
-							</span>
-						</span>
-                        <span class="about-icon">
-                            <span>
-                                <span>
-                                    <span class="tooltip" data-content="Text split in sentences"><i class="material-icons">info</i></span>
-                                </span>
-                            </span>
-                        </span>
-                    </div>
-                    <div class="rb-content">-</div>
-                </div>
+                <form id="myForm" action="visualize" method="post">
+                  <div class="rb-inner">
+                      <div class="rb-title">
+                          <span class="box-icon"><span><span><i class="material-icons">format_quote</i></span></span></span>
+                          <h3>Sentences</h3>
+                          <span class="visualize-btn">
+  							               <span><span><a onclick="document.getElementById('myForm').submit();" class="mv1 f8 link dim br3 ba bw1 ph3 pv2 mb2 dib black">DEP Analysis</a></span></span>
+  						            </span>
+  						            <span class="toggle-option">
+  							               <span><span><label>Lemmatized<input type="checkbox" class="lemmatize-sentences" /></label></span></span>
+  						            </span>
+                          <span class="about-icon">
+                              <span>
+                                  <span>
+                                      <span class="tooltip" data-content="Text split in sentences"><i class="material-icons">info</i></span>
+                                  </span>
+                              </span>
+                          </span>
+                      </div>
+                      <div class="rb-content"></div>
+                  </div>
+              </form>
             </div>
         </div>
 
