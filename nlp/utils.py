@@ -5,6 +5,7 @@ from subprocess import check_output
 from collections import defaultdict
 
 from django.conf import settings
+from spacy import displacy
 from gensim.summarization import summarize
 
 fasttext_path = '/opt/demo-app/fastText/fasttext'
@@ -28,7 +29,6 @@ POS_MAPPING = {
 
 def analyze_text(text):
         ret = {}
-
         # language identification
         language = settings.LANG_ID.classify(text)[0]
         lang = settings.LANGUAGE_MODELS[language]
@@ -77,8 +77,8 @@ def analyze_text(text):
 
         # Sentences splitting
         ret['sentences'] = [sentence.text for sentence in doc.sents]
-      
-        # Lemmatized sentences splitting 
+
+        # Lemmatized sentences splitting
         ret['lemmatized_sentences'] = [sentence.lemma_ for sentence in doc.sents]
 
         # Text tokenization
@@ -116,3 +116,9 @@ def predict_category(text, language):
         pass
 
     return category
+
+def visualize_text(text):
+    language = settings.LANG_ID.classify(text)[0]
+    lang = settings.LANGUAGE_MODELS[language]
+    doc = lang(text)
+    return displacy.parse_deps(doc)
