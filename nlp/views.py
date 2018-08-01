@@ -7,7 +7,7 @@ from readability import Document
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
-from .utils import analyze_text
+from .utils import analyze_text, visualize_text
 
 if settings.ALLOW_URL_IMPORTS:
     import requests
@@ -24,6 +24,12 @@ def about(request):
     context = {}
     return render(request, 'nlp/about.html', context)
 
+def visualize_view(request):
+    ret={}
+    text = request.POST.get('sentences')
+    markup = visualize_text(text)
+    ret['json'] = markup
+    return render(request, 'nlp/visualize.html', ret)
 
 def analyze(request):
     'API text analyze view'
@@ -32,7 +38,7 @@ def analyze(request):
         try:
             text = json.loads(text)['text']
         except ValueError:
-            # catch POST form as well            
+            # catch POST form as well
             for key in request.POST.dict().keys():
                 text = key
 
@@ -57,4 +63,3 @@ def analyze(request):
     else:
         ret = {'methods_allowed': 'POST'}
         return JsonResponse(ret)
-
