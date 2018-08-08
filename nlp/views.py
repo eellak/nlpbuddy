@@ -24,6 +24,11 @@ def about(request):
     context = {}
     return render(request, 'nlp/about.html', context)
 
+def gsoc(request):
+    'About gsoc'
+    context = {}
+    return render(request, 'nlp/gsoc.html', context)
+
 def visualize_view(request):
     ret={}
     text = request.POST.get('sentences')
