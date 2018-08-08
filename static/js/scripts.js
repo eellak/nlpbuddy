@@ -256,8 +256,8 @@ function TextAnalyzerEditor() {
                 w = '';
                 i = 0;
                 while (i < val.length) {
-                    w += '<li style="list-style-type: none;"> <input checked style="margin-right:1rem" type="radio" value="'+ val[i].trim()+'" name=sentences' + '>' + val[i].trim() + '</input> </li>';
-                    i += 1;
+                  w += '<li>' + val[i].trim() + '<a href="#" style="text-decoration:none" onclick="trigger(this)" id="' + val[i].trim() + '"><i style="vertical-align: middle; display: inline" class="material-icons">remove_red_eye</i></a></li>';
+                  i += 1;
                 }
                 w = '' === w ? w : '<ol>' + w + '</ol>';
                 ins.elem.boxes.sentencesContent.innerHTML = w;

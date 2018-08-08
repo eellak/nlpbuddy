@@ -52,14 +52,11 @@
             </div>
 
             <div class="results-box sentences">
-                <form id="myForm" action="visualize" method="post">
+                <form id="myForm" target="_blank"  action="visualize" method="post">
                   <div class="rb-inner">
                       <div class="rb-title">
                           <span class="box-icon"><span><span><i class="material-icons">format_quote</i></span></span></span>
                           <h3>Sentences</h3>
-                          <span class="visualize-btn">
-  							               <span><span><a onclick="document.getElementById('myForm').submit();" class="mv1 f8 link dim br3 ba bw1 ph3 pv2 mb2 dib black">DEP Analysis</a></span></span>
-  						            </span>
   						            <span class="toggle-option">
   							               <span><span><label>Lemmatized<input type="checkbox" class="lemmatize-sentences" /></label></span></span>
   						            </span>
@@ -71,7 +68,7 @@
                               </span>
                           </span>
                       </div>
-                      <div class="rb-content"></div>
+                      <div class="rb-content">-</div>
                   </div>
               </form>
             </div>
@@ -192,5 +189,23 @@
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function trigger(elem){
+  var form = document.getElementById("myForm");
+  var inp = document.createElement('input');
+  inp.setAttribute("type","text");
+  inp.setAttribute("value", elem.id);
+  inp.setAttribute("name", "sentences");
+  form.appendChild(inp);
+  form.submit();
+  form.removeChild(inp);
+}
+</script>
+
+
 
 {% endblock %}
