@@ -155,6 +155,8 @@ function TextAnalyzerEditor() {
             case 'various':
                 w = 'undefined' !== typeof val.language ? '<li><label>' + i18n.Languague + ':</label>' + val.language + '</li>' : '';
                 w += 'undefined' !== typeof val.category ? '<li><label>' + i18n.Category + ':</label>' + val.category + '</li>' : '';
+                w += 'undefined' !== typeof val.emotion_name ? '<li><label>' + 'Emotion' + ':</label>' + val.emotion_name + '</li>' : '';
+                w += 'undefined' !== typeof val.subjectivity ? '<li><label>' + 'Subjectivity' + ':</label>' + val.subjectivity + '% </li>' : '';
                 w = '' === w ? w : '<ul>' + w + '</ul>';
                 ins.elem.boxes.variousContent.innerHTML = w;
                 break;
@@ -266,7 +268,7 @@ function TextAnalyzerEditor() {
 
     function responseTextAnalysis(result) {
         load_results('text', result.text || '');
-        load_results('various', { language: result.language, category: result.category });
+        load_results('various', { language: result.language, category: result.category, emotion_name: result.emotion_name, emotion_score: result.emotion_score, subjectivity: result.subjectivity});
         load_results('keywords', result.keywords && ( '' !== result.keywords ? result.keywords.split(',') : [] ) );
         load_results('summary', result.summary || '');
         load_results('entities', result.named_entities);
