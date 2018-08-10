@@ -13,9 +13,9 @@ import logging
 fasttext_path = '/opt/demo-app/fastText/fasttext'
 
 # uncomment for debugging purporses
-fmt = getattr(settings, 'LOG_FORMAT', None)
-lvl = getattr(settings, 'LOG_LEVEL', logging.DEBUG)
-logging.basicConfig(format=fmt, level=lvl)
+# fmt = getattr(settings, 'LOG_FORMAT', None)
+# lvl = getattr(settings, 'LOG_LEVEL', logging.DEBUG)
+# logging.basicConfig(format=fmt, level=lvl)
 
 
 MODEL_MAPPING = {
@@ -222,8 +222,8 @@ def sentiment_analysis(doc):
                     'happiness': happiness_score, 'sadness': sadness_score, 'surprise': surprise_score}
         emotion_name = max(emotions.items(), key=operator.itemgetter(1))[0]
         emotion_score = emotions[emotion_name] * 100 / matched_tokens
-        ret = {'subjectivity': subjectivity_score,
-               'emotion_name': emotion_name, 'emotion_score': emotion_score}
+        ret = {'subjectivity': round(subjectivity_score, 2),
+               'emotion_name': emotion_name, 'emotion_score': round(emotion_score, 2)}
         # logging.debug(subjectivity_score)
         return ret
     except ZeroDivisionError:
