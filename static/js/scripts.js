@@ -256,7 +256,7 @@ function TextAnalyzerEditor() {
                 w = '';
                 i = 0;
                 while (i < val.length) {
-                  w += '<li>' + val[i].trim() + '<a href="#" style="text-decoration:none" onclick="trigger(this)" id="' + val[i].trim() + '"><i style="vertical-align: middle; display: inline" class="material-icons">remove_red_eye</i></a></li>';
+                  w += '<li>' + val[i].trim() + '<a href="#" style="text-decoration:none" onclick="trigger(this)" id="' + val[i].trim() + '"><i style="margin-left: 0.5rem; vertical-align: middle; display: inline" class="material-icons">remove_red_eye</i></a></li>';
                   i += 1;
                 }
                 w = '' === w ? w : '<ol>' + w + '</ol>';
