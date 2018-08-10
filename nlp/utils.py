@@ -79,8 +79,6 @@ def analyze_text(text):
     lang = settings.LANGUAGE_MODELS[language]
     ret = {}
     doc = lang(text)
-    urls = []
-    emails = []
     ret['language'] = settings.LANGUAGE_MAPPING[language]
     # analyzed text containing lemmas, pos and dep. Entities are coloured
     analyzed_text = ''
