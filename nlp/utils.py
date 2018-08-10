@@ -1,11 +1,9 @@
 import os
-import sys
 import tempfile
 from subprocess import check_output
 from collections import defaultdict
 
 from django.conf import settings
-from django.core.files import File
 from spacy import displacy
 from gensim.summarization import summarize
 import pandas as pd
@@ -100,7 +98,7 @@ def analyze_text(text):
         ret.update(sentiment_analysis(doc))
         try:
             ret['category'] = predict_category(text, language)
-        except:
+        except Exception:
             pass
 
     try:
@@ -169,7 +167,7 @@ def predict_category(text, language):
     # remove file
     try:
         os.remove(fp.name)
-    except:
+    except Exception:
         pass
 
     return category
@@ -201,7 +199,7 @@ def sentiment_analysis(doc):
                 if (token.pos_ == df.at[indx, col]):
                     pos_flag = True
                     break
-            if (pos_flag == True):
+            if (pos_flag):
                 match_col_index = [int(s) for s in col if s.isdigit()][0]
                 subjectivity_score += subj_scores[df.at[indx,
                                                         'Subjectivity' + str(match_col_index)]]
@@ -230,5 +228,5 @@ def sentiment_analysis(doc):
         return ret
     except ZeroDivisionError:
         return {}
-    except:
+    except Exception:
         return {}

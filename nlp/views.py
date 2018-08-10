@@ -1,9 +1,4 @@
 import json
-
-import requests
-from bs4 import BeautifulSoup
-from readability import Document
-
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
@@ -36,7 +31,7 @@ def gsoc(request):
 def visualize_view(request):
     ret = {}
     text = request.POST.get('sentences')
-    if (text == None):
+    if (text is None):
         return render(request, 'nlp/visualize_error.html')
     markup = visualize_text(text)
     ret['json'] = markup
