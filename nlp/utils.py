@@ -8,6 +8,8 @@ from spacy import displacy
 from gensim.summarization import summarize
 import pandas as pd
 import operator
+import re
+
 
 
 fasttext_path = '/opt/demo-app/fastText/fasttext'
@@ -153,7 +155,7 @@ def analyze_text(text):
             part_of_speech[mapped_token].append(token.text)
     ret['part_of_speech'] = part_of_speech
     ret['lexical_attrs'] = lexical_attrs
-    ret['noun_chunks'] = [x.text for x in doc.noun_chunks]
+    ret['noun_chunks'] = [re.sub(r'[^\w\s]', '', x.text) for x in doc.noun_chunks]
     return ret
 
 
