@@ -109,11 +109,18 @@ def analyze_text(text):
 
     # top 10 most frequent keywords, based on tokens lemmatization
     frequency = defaultdict(int)
+    lexical_attrs = {
+        'urls': [],
+        'emails': [],
+        'nums': [],
+    }
     for token in doc:
         if (token.like_url):
-            urls.append(token)
+            lexical_attrs['urls'].append(token.text)
         if (token.like_email):
-            emails.append(token)
+            lexical_attrs['emails'].append(token.text)
+        if (token.like_num or token.is_digit):
+            lexical_attrs['nums'].append(token.text)
         if not token.is_stop and token.pos_ in ['VERB', 'ADJ', 'NOUN', 'ADV', 'AUX', 'PROPN']:
             frequency[token.lemma_] += 1
     keywords = [keyword for keyword, frequency in sorted(
@@ -147,8 +154,7 @@ def analyze_text(text):
         if mapped_token and token.text not in part_of_speech[mapped_token]:
             part_of_speech[mapped_token].append(token.text)
     ret['part_of_speech'] = part_of_speech
-    # ret['urls'] = urls
-    # ret['emails'] = emails
+    ret['lexical_attrs'] = lexical_attrs
     return ret
 
 

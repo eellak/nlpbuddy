@@ -262,6 +262,43 @@ function TextAnalyzerEditor() {
                 w = '' === w ? w : '<ol>' + w + '</ol>';
                 ins.elem.boxes.sentencesContent.innerHTML = w;
                 break;
+            case 'lexical_attrs':
+                w = '';
+                if ('undefined' !== typeof val.urls && val.urls.length) {
+                    d = '';
+                    i = 0;
+                    while (i < val.urls.length) {
+                        d += '<span>' + val.urls[i] + '</span>';
+                        i += 1;
+                    }
+                    w += '<li><label>' + 'Urls' + '</label><div class="verbs">' + d + '</div></li>';
+                }
+
+                if ('undefined' !== typeof val.emails && val.emails.length) {
+                    d = '';
+                    i = 0;
+                    while (i < val.emails.length) {
+                        d += '<span>' + val.emails[i] + '</span>';
+                        i += 1;
+                    }
+                    w += '<li><label>' + 'Emails' + '</label><div class="adjectives">' + d + '</div></li>';
+                }
+
+                if ('undefined' !== typeof val.nums && val.nums.length) {
+                    d = '';
+                    i = 0;
+                    while (i < val.nums.length) {
+                        d += '<span>' + val.nums[i] + '</span>';
+                        i += 1;
+                    }
+                    w += '<li><label>' + 'Numericals' + '</label><div class="nouns">' + d + '</div></li>';
+
+                }
+
+                w = '' === w ? w : '<ul>' + w + '</ul>';
+
+                ins.elem.boxes.lexicalAttributesContent.innerHTML = w;
+                break;
 
         }
     }
@@ -274,6 +311,7 @@ function TextAnalyzerEditor() {
         load_results('entities', result.named_entities);
         load_results('part_of_speech', result.part_of_speech);
         load_results('tokens', result.text_tokenized || []);
+        load_results('lexical_attrs', result.lexical_attrs);
 
         load_results('sentences', result[ ins.states.lemmatizedSentences ? 'lemmatized_sentences' : 'sentences' ] );
 
@@ -346,6 +384,7 @@ function TextAnalyzerEditor() {
         summaryContent: document.querySelector('.results-box.summary .rb-content'),
         entitiesContent: document.querySelector('.results-box.entities .rb-content'),
         partOfSpeechContent: document.querySelector('.results-box.part-of-speech .rb-content'),
+        lexicalAttributesContent: document.querySelector('.results-box.lexical-attrs .rb-content'),
         tokensContent: document.querySelector('.results-box.tokens .rb-content'),
         sentencesContent: document.querySelector('.results-box.sentences .rb-content')
     };
