@@ -15,38 +15,11 @@ import logging
 fasttext_path = '/opt/demo-app/fastText/fasttext'
 
 # uncomment for debugging purporses
-# fmt = getattr(settings, 'LOG_FORMAT', None)
-# lvl = getattr(settings, 'LOG_LEVEL', logging.DEBUG)
-# logging.basicConfig(format=fmt, level=lvl)
+fmt = getattr(settings, 'LOG_FORMAT', None)
+lvl = getattr(settings, 'LOG_LEVEL', logging.DEBUG)
+logging.basicConfig(format=fmt, level=lvl)
 
 
-indexes = {}
-df = pd.read_csv('greek_sentiment_lexicon.tsv', sep='\t')
-df = df.fillna('N/A')
-for index, row in df.iterrows():
-    df.at[index, "Term"] = row["Term"].split(' ')[0]
-    indexes[df.at[index, "Term"]] = index
-subj_scores = {
-    'OBJ': 0,
-    'SUBJ-': 0.5,
-    'SUBJ+': 1,
-}
-
-emotion_scores = {
-    'N/A': 0,
-    '1.0': 0.2,
-    '2.0': 0.4,
-    '3.0': 0.6,
-    '4.0': 0.8,
-    '5.0': 1,
-}
-
-polarity_scores = {
-    'N/A': 0,
-    'BOTH': 0,
-    'NEG': -1,
-    'POS': 1
-}
 
 MODEL_MAPPING = {
     'el': '/opt/demo-app/demo/el_classiffier.bin'
@@ -64,8 +37,37 @@ POS_MAPPING = {
     'VERB': 'verbs',
     'ADJ': 'adjectives',
 }
+def load_greek_lexicon():
+    indexes = {}
+    df = pd.read_csv('datasets/sentiment_analysis/greek_sentiment_lexicon.tsv', sep='\t')
+    df = df.fillna('N/A')
+    for index, row in df.iterrows():
+        df.at[index, "Term"] = row["Term"].split(' ')[0]
+        indexes[df.at[index, "Term"]] = index
+    subj_scores = {
+        'OBJ': 0,
+        'SUBJ-': 0.5,
+        'SUBJ+': 1,
+    }
 
+    emotion_scores = {
+        'N/A': 0,
+        '1.0': 0.2,
+        '2.0': 0.4,
+        '3.0': 0.6,
+        '4.0': 0.8,
+        '5.0': 1,
+    }
 
+    polarity_scores = {
+        'N/A': 0,
+        'BOTH': 0,
+        'NEG': -1,
+        'POS': 1
+    }
+    return df, subj_scores, emotion_scores, polarity_scores, indexes
+
+df, subj_scores, emotion_scores, polarity_scores, indexes = load_greek_lexicon()
 def analyze_text(text):
         ret = {}
         # language identification
