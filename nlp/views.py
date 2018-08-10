@@ -32,6 +32,8 @@ def gsoc(request):
 def visualize_view(request):
     ret={}
     text = request.POST.get('sentences')
+    if (text == None):
+        return render(request, 'nlp/visualize_error.html')
     markup = visualize_text(text)
     ret['json'] = markup
     return render(request, 'nlp/visualize.html', ret)
