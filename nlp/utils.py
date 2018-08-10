@@ -8,11 +8,12 @@ from spacy import displacy
 from gensim.summarization import summarize
 import pandas as pd
 import operator
-import logging
+
 
 fasttext_path = '/opt/demo-app/fastText/fasttext'
 
 # uncomment for debugging purporses
+# import logging
 # fmt = getattr(settings, 'LOG_FORMAT', None)
 # lvl = getattr(settings, 'LOG_LEVEL', logging.DEBUG)
 # logging.basicConfig(format=fmt, level=lvl)
