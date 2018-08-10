@@ -1,26 +1,25 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
-    <main>
-            <div class="left-side w-100 w-60-l">
+<main>
+  <div class="left-side w-100 w-60-l">
 
 
-<h1>About</h1>
-<p>
-This is a text analysis application, capable of performing common NLP tasks through the API and a web dashboard. 
+    <h1>About</h1>
+    <p>
+      This is a text analysis application, capable of performing common NLP tasks through the API and a web dashboard.
 
-<br>It has been created as part of the GSOC 2018 project of "adding Greek support to spaCy.io" and released as open source package - <a href=https://github.com/eellak/text-analysis">https://github.com/eellak/text-analysis</a>
+      <br>It has been created as part of the GSOC 2018 project of "adding Greek support to spaCy.io" and released as open source package - <a href=https://github.com/eellak/text-analysis ">https://github.com/eellak/text-analysis</a>
 <br>
 <br>
-Text analysis is performed through <a href="https://spacy.io">spaCy.io</a> NLP framework, supported languages are: Greek, English, German, Italian, French, Dutch, Spanish and Portoguese.
+Text analysis is performed through <a href="https://spacy.io ">spaCy.io</a> NLP framework, supported languages are: Greek, English, German, Italian, French, Dutch, Spanish and Portoguese.
 </p>
 The web application we've used is Django.
-<br>For text summarization we use <a href="https://github.com/RaRe-Technologies/gensim">gensim's</a> implementation of the TextRank algorithm. 
+<br>For text summarization we use <a href="https://github.com/RaRe-Technologies/gensim ">gensim's</a> implementation of the TextRank algorithm.
 <br>
-The Greek language support contains a text classifier that we've built with FastText. 
+The Greek language support contains a text classifier that we've built with FastText.
 <br>It is trained in 20.000 articles labeled in the following categories:
 <br><br>
-Αθλητισμός, Ελλάδα, Επιστήμη, Κόσμος, Οικονομία, Περιβάλλον, Πολιτική, Τέχνες, Υγεία 
+Αθλητισμός, Ελλάδα, Επιστήμη, Κόσμος, Οικονομία, Περιβάλλον, Πολιτική, Τέχνες, Υγεία
 <br><br>and it attempts to classify a greek text provided on one of these categories. 
 
 <br>
