@@ -252,6 +252,15 @@ function TextAnalyzerEditor() {
                 }
                 ins.elem.boxes.tokensContent.innerHTML = w;
                 break;
+            case 'noun_chunks':
+                w = '';
+                i = 0;
+                while (i < val.length) {
+                    w += '<span>' + val[i].trim() + '</span>';
+                    i += 1;
+                }
+                ins.elem.boxes.chunksContent.innerHTML = w;
+                break;
             case 'sentences':
                 w = '';
                 i = 0;
@@ -312,7 +321,7 @@ function TextAnalyzerEditor() {
         load_results('part_of_speech', result.part_of_speech);
         load_results('tokens', result.text_tokenized || []);
         load_results('lexical_attrs', result.lexical_attrs);
-
+        load_results('noun_chunks', result.noun_chunks);
         load_results('sentences', result[ ins.states.lemmatizedSentences ? 'lemmatized_sentences' : 'sentences' ] );
 
         fnc.dom.addClass(ins.elem.body, 'has-results');
@@ -386,6 +395,7 @@ function TextAnalyzerEditor() {
         partOfSpeechContent: document.querySelector('.results-box.part-of-speech .rb-content'),
         lexicalAttributesContent: document.querySelector('.results-box.lexical-attrs .rb-content'),
         tokensContent: document.querySelector('.results-box.tokens .rb-content'),
+        chunksContent: document.querySelector('.results-box.noun-chunks .rb-content'),
         sentencesContent: document.querySelector('.results-box.sentences .rb-content')
     };
 

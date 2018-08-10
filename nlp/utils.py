@@ -13,10 +13,10 @@ import operator
 fasttext_path = '/opt/demo-app/fastText/fasttext'
 
 # uncomment for debugging purporses
-# import logging
-# fmt = getattr(settings, 'LOG_FORMAT', None)
-# lvl = getattr(settings, 'LOG_LEVEL', logging.DEBUG)
-# logging.basicConfig(format=fmt, level=lvl)
+import logging
+fmt = getattr(settings, 'LOG_FORMAT', None)
+lvl = getattr(settings, 'LOG_LEVEL', logging.DEBUG)
+logging.basicConfig(format=fmt, level=lvl)
 
 
 MODEL_MAPPING = {
@@ -153,6 +153,7 @@ def analyze_text(text):
             part_of_speech[mapped_token].append(token.text)
     ret['part_of_speech'] = part_of_speech
     ret['lexical_attrs'] = lexical_attrs
+    ret['noun_chunks'] = [x.text for x in doc.noun_chunks]
     return ret
 
 
