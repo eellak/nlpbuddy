@@ -4,11 +4,17 @@
 
   <div class="w-100 w-80-l">
     <h1 class="wow">Addition of Greek language to spaCy - GSOC 2018</h1>
-    <p class="gsoc-p wow ">NLPBuddy is a side result of the project <i> "Addition of Greek language to spaCy"</i> for <b> Google Summer of Code 2018.</b> <br> <br> This page serves as a report for the <b> Google Summer of Code 2018 Project</b>. The project was developed under
+    <p class="gsoc-p wow ">NLPBuddy is a side result of the project <i><b>"<a href="https://summerofcode.withgoogle.com/projects/#6323820630114304" target="_blank">Addition of Greek language to spaCy</a>"</i></b> for <b> Google Summer of Code 2018.</b> <br> <br> This page serves as a <b>report</b> for the Google Summer of Code 2018 Project.<br><br>
+       The project was developed under
       the auspices of <b> GFOSS - Open Technologies Alliance. </b> <br> <br>
       <h2> Report Contents </h2>
       <ul class="wow">
-        <li class="gsoc-li dim"><a href="#repos"> Repositories and Wiki </a> </li>
+        <li class="gsoc-li dim"><a href="#links">Project Links</a> </li>
+          <ul>
+            <li class="gsoc-p dim"><a href="#project">Project repository and wiki page</a></li>
+            <li class="gsoc-p dim"><a href="#demo">Demo repository and wiki page</a></li>
+            <li class="gsoc-p dim"><a href="#timeline">Timeline</a></li>
+          </ul>
         <li class="gsoc-li dim"><a href="#problem-statement"> Problem Statement and Project Goals </a> </li>
         <li class="gsoc-li dim"><a href="#results"> Results - Production Ready Tools </a> </li>
         <ul>
@@ -38,43 +44,43 @@
         <li class="gsoc-li dim"><a href="#people"> People </a></li>
       </ul>
 
-    </p>
 
     <br> <br>
 
-    <h2 class="wow" id="repos"> Repositories and Wiki </h2>
-    <p class="gsoc-p"> This section contains some useful links/resources for the project. <br> <br>
+    <h2 class="wow" id="links"> Project links </h2>
+    <p class="gsoc-p">This section provides links to the source code, the documentation and the project timeline. <br>
+      The main purpose of the section is to list all the places in which you can find work implemented during Google Summer of Code. <br>
+      There is extensive analysis of the results of the work in the <a href="results">Results</a> section and in the <a href="deliverables"> Deliverables</a> section.
+      However, if you need a direct tour to the whole project, this section is for you. <br> <br>
 
-      <ul>
-        <li class="gsoc-li">The first link is the project repository where you can see all the work that is related to the addition of Greek language support to spaCy platform. <br>
-        </li>
-        <li class="gsoc-li"> The second link is the NLPBuddy repository in which you can find all the work related to the implementation of an open source demo on top of spaCy that demonstrates and performs common NLP tasks in 7 languages, including Greek.
-          </li>
-
-        <li class="gsoc-li"> The third link is the project wiki in which you will find detailed and explanatory documentation for everything related to the integration of Greek language to spaCy.
-        </li>
-
-        <li class="gsoc-li"> The fourth link is the demo wiki in which you will find detailed and explanatory documentation about everything related to the implementation, the usage and the reproduction of the demo.</li>
-
-      </ul>
+      <u> Note</u>: There are <b>two repositories</b> and <b>two wiki pages</b>. <br> The first repo and the corresponding wiki page include everything that
+      has to do with the addition of the Greek language to spaCy. <br>The second repo and the corresponding wiki page include everything that has to do with the
+      implementation of a demo app on top of Spacy that demonstrates its' capabilities and supports various features such as sentiment analysis, topic classification, etc.
       <br> <br>
+    </p>
+    <div class="ph3">
+      <h3 id="project"> <i class="v-mid di material-icons">
+arrow_right_alt
+</i> Project repository and Wiki page </h3>
+      <p class="gsoc-p">The project proposal was mainly about adding <b> Greek language support to spaCy</b> platform. <br> <br>
+        This goal is accomplished and the source code
+      is provided in the following repository: <br> </p>
+      <div class="wow zoomIn">
+      <div class="github-card" data-github="eellak/gsoc2018-spacy" data-width="400" data-height="151" data-theme="default"></div>
+      <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+    </div>
+      <br> <br>
+      <p class="gsoc-p"> There is extensive documentation of every aspect of the process of adding Greek language to spaCy in the following Wiki page: </p>
       <div class="wow zoomInRight">
-        <div class="github-card" data-github="eellak/gsoc2018-spacy" data-width="400" data-height="151" data-theme="default"></div>
-        <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
-
-
-        <div class="github-card" data-github="eellak/text-analysis" data-width="400" data-height="" data-theme="default"></div>
-        <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
-
-        <br>
-        <article class="br2 ba dark-gray b--black-10 mv4 mw5 dib">
-          <a target="_blank" href="https://github.com/eellak/gsoc2018-spacy/wiki">
-<img src="https://s.hswstatic.com/gif/wiki-ch.jpg" class="db w-100 br2 br--top" alt="Project wiki">
-</a>
+        <a style="text-decoration: none" href="https://github.com/eellak/gsoc2018-spacy/wiki" target="_blank">
+        <article style="height:151px" class="br2 ba bg-white dark-gray b--black-10 mv4 mw5">
           <div class="pa2 ph3-ns pb3-ns">
             <div class="dt w-100 mt1">
               <div class="dtc">
-                <h1 class="f5 f4-ns mv0">Project wiki</h1>
+                <h1 class="f5 f4-ns mv0"><i class="v-mid di material-icons">
+info
+
+</i> Project Wiki</h1>
               </div>
             </div>
             <p class="f6 lh-copy measure mt2 mid-gray">
@@ -83,26 +89,63 @@
           </div>
 
         </article>
+      </a>
+      </div>
+    </p>
+    <br> <br>
+    <h3 id="demo"><i class="v-mid di material-icons">
+arrow_right_alt
+</i> Demo repository and Wiki page </h3>
+    <p class="gsoc-p"> NLPBuddy is a demo produced during the Google Summer of Code. It is built on top of spaCy and it implements various interesting
+      tasks, all supported for Greek language too. <br><br> It makes use of the first part of the Google Summer of Code project, the addition of Greek language to spaCy, and it has some quite interesting
+      features such as <b>syntax analysis</b>, <b>emotion analysis</b>, <b>topic classification</b> and <b>a lot more</b>.
+
+      <br> <br>
+
+      The project repo is the following: </p>
+
+        <div class="wow zoomInDown">
+        <div class="github-card" data-github="eellak/nlpbuddy" data-width="400" data-height="" data-theme="default"></div>
+        <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+</div>
+        <br><br>
 
 
-        <article class="br2 ba dark-gray b--black-10 mv4 mw5 dib">
-          <a target="_blank" href="https://github.com/eellak/text-analysis/wiki">
-<img src="https://s.hswstatic.com/gif/wiki-ch.jpg" class="db w-100 br2 br--top" alt="Demo wiki">
-</a>
+<p class="gsoc-p">The corresponding Wiki page is the following: <br> </p>
+<div class="wow zoomIn">
+        <a href="https://github.com/eellak/text-analysis/wiki" target="_blank" style="text-decoration:none">
+        <article class="br2 ba dark-gray bg-white b--black-10 mv4 mw5 dib">
           <div class="pa2 ph3-ns pb3-ns">
             <div class="dt w-100 mt1">
               <div class="dtc">
-                <h1 class="f5 f4-ns mv0">Demo wiki</h1>
+                <h1 class="f5 f4-ns mv0"><i class="v-mid di material-icons">
+info
+</i> Demo Wiki</h1>
               </div>
             </div>
             <p class="f6 lh-copy measure mt2 mid-gray">
-              Extensive documentation about the implementation, the usage and the reproduction of the demo.
+              Extensive, explanatory documentation about the implementation, the usage and the reproduction of the demo.
             </p>
           </div>
 
-        </article>
-
+        </article> </a>
       </div>
+<br> <br>
+        <h3 id="timeline"> <i class="v-mid di material-icons">
+  arrow_right_alt
+  </i>Timeline </h3>
+        <p class="gsoc-p">There is a timeline that tracks the whole Google Summer of Code work in a <b>daily basis</b>. <br> <br>
+
+        It is divided into the following sections: In progress, Done, TODO, Need test, Need improvement - Future work. <br> <br>
+
+        You can find the timeline <a href="https://github.com/eellak/gsoc2018-spacy/projects/1" target="_blank">here</a>. <br> <br>
+
+        <u> DISCLAIMER</u>: Due to the huge complexity of the project, it is impossible even for me to list everything that I have done during
+        Google Summer of Code. I managed to list over 50 Completed Tasks but I am pretty sure that there are some more missing.
+
+</p>
+      </div>
+<br> <br>
       <h2 class="wow" id="problem-statement"> Problem Statement - Project Goals </h2>
       <p class="wow gsoc-p">
         We live in the era of data. <b>Every minute</b>, 3.8 billion internet users, produce content; more than 120 million emails, 500,000 Facebook comments, 3 million Google searches. If we want to process that amount of data efficiently, we need to
@@ -111,38 +154,93 @@
         <br> <br> This project is about improving the quality of Natural Language Processing of Greek Language.
         <br> <br> The project goals can be categorized as following:
         <ol>
-          <li class="gsoc-li"> Integration of Greek language to spaCy platform <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li>
-          <li class="gsoc-li"> Production of models for Part-Of-Speech (POS) tagging, Dependency Analysis (DEP) and Named Entities Recognition (NER), with and without vectors. <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li>
-          <li class="gsoc-li"> An open source text analysis tool (demo) in which everyone can perform common NLP tasks in 7 languages. <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li>
+          <li class="gsoc-li"> Addition of the Greek language to spaCy platform <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li> <br>
+          <li class="gsoc-li"> Production of models for Part-Of-Speech (POS) tagging, Dependency Analysis (DEP) and Named Entities Recognition (NER), with and without word vectors. <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li> <br>
+          <li class="gsoc-li"> An open source text analysis tool (demo) in which everyone can perform common NLP tasks in 7 languages. <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li> <br>
+          <li class="gsoc-li"> <b>Bonus goal</b>: Usage of the addition of Greek language for sentiment analysis and other challenging NLP tasks.  <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li> </li>
         </ol>
       </p>
+
+      <br> <br>
+
+      <p class="gsoc-p"><u> Note </u>: As you can see all the project goals have been achieved. However, the good news is that a lot more side results have been produced.
+      Analysis of the achievements (with pull requests, links to production ready modules, etc) follows in the next two sections. </p>
 
 
       <br> <br>
 
       <h2 class="wow" id="results"> Results - Production ready tools</h2>
+      <div class="mh3">
+
+        <h3 class="wow" id="greek-spacy"><i class="v-mid di material-icons">
+arrow_right_alt
+</i>Addition of Greek language support to spaCy.</h3>
+
+        <p class="gsoc-p">
+
+          Greek language has been successfully added to spaCy, which was actually the most important goal of the project. <br><br>
+          There were two pull requests for this purpose; the first was the initial addition of the language and the second pull request contained important optimizations that made the support for the Greek language probably the most complete in terms of features after the English language.
+
+          <br> <br><u>Addition of the language</u>: You can see the first pull request <a href="https://github.com/explosion/spaCy/pull/2558" target="_blank"> here</a>. <br> <br>
+          <u>Optimizations to the Greek language class</u>: You can see the second pull request <a href="https://github.com/explosion/spaCy/pull/2658" target="_blank"> here</a>. <br> <br>
 
 
-      <h3 id="NLPBuddy"> NLPBuddy - Open Source Text Analysis Tool </h3>
+           Each part of the process of integrating Greek language to spaCy is discussed in detail in the <a target="_blank"
+            href="https://github.com/eellak/gsoc2018-spacy/wiki">Wiki</a> page of the project.
+
+        </p>
+
+<br> <br>
+
+<h3 id="greek-models"> <i class="v-mid di material-icons">
+arrow_right_alt
+</i>Greek language models </h3>
+
+<p class="gsoc-p"> Two models for Greek language have been produced.
+<br> <br>
+  There is an ongoing process of uploading them to spaCy. <br> After that, you will be able to install them with the folllowing commands: </p>
+<xmp>
+  python3 -m spacy download el_core_web_sm
+  python3 -m spacy download el_core_web_lg
+</xmp>
+<p class="gsoc-p">
+  Greek language models support most of the capabilities that you will find in the <a href="#deliverables">deliverables</a> section. Sentence splitting, tokenization, Part Of Speech Tagging, Syntax Analysis using DEP tags, Named Entities Recognition,
+  lexical attributes extraction, norm exceptions and stop-words lists, are all included the Greek language models. The big Greek model (el_core_web_lg) includes word vectors so it supports features such as similarity detection between texts.
+  <br> <br> You can find more about the models production, usage and maintenance, in the <a target="_blank" href="https://github.com/eellak/gsoc2018-spacy/wiki/models">models page of the wiki</a>.
+  <br><br> Some visualizations from the models usage:
+</p>
+<div class="tc">
+  <img class="wow slideInLeft" src="../../static/img/gsoc-images/pos1.png">
+  <figcaption class="wow slideInLeft"><i>Part of Speech Tagger vol1</i></figcaption>
+  <br><br>
+  <img class="wow slideInUp" src="../../static/img/gsoc-images/ner1.png">
+  <figcaption class="wow slideInUp"><i>Named Entities Recognition vol1</i></figcaption>
+  <br> <br>
+  <img class="wow slideInLeft" src="../../static/img/gsoc-images/pos2.png">
+  <figcaption class="wow slideInLeft"><i>Part of Speech Tagger vol2</i></figcaption>
+  <img class="wow slideInUp" src="../../static/img/gsoc-images/ner2.png">
+  <br> <br>
+  <figcaption class="wow slideInUp"><i>Named Entities Recognition vol2</i></figcaption>
+</div>
+
+<br> <br>
+      <h3 id="NLPBuddy"> <i class="v-mid di material-icons">
+arrow_right_alt
+</i> NLPBuddy - Open Source Text Analysis Tool </h3>
 
       <p class="gsoc-p">
-        The first to mention outcome of the project is <b> NLPBuddy </b>. </p>
-      <div class="w-40">
-        <a href="/" target="_blank" class="wow slideInLeft boton w">
+        NLPBuddy is an open source text analysis tool that has been developed as a demonstration of the project results.
+        <div class="center">
+        <a href="/" target="_blank" class="wow slideInLeft absolute boton w">
   Try it
   </a>
       </div>
 
       <p class="gsoc-p">
-        NLPBuddy is an open source text analysis tool that has been developed as a demonstration of the project results. <br> <br> NLPBuddy leverages <a target="_blank" href="https://spacy.io/"> Spacy's </a> capabilities to extract as much information
-        as possible from raw text.
+        <br> <br> NLPBuddy leverages <a target="_blank" href="https://spacy.io/"> Spacy's </a> capabilities to extract as much information
+        as possible from raw text.</p>
 
       </p>
-
-
-
-
-
 
 
       <p class="gsoc-p"> Briefly, in this demo you can perform the following tasks with your text in <b> 7 languages</b>: </p>
@@ -171,57 +269,43 @@
 
         <br> <br> Text can either be provided or imported from a URL. For the preprocess of the text imported from a URL, the following libraries are used: python <a href="https://github.com/buriy/python-readability" target="_blank">readability</a>, <a href="https://www.crummy.com/software/BeautifulSoup/" target="_blank">BeautifulSoup4</a>.
 
+        <br> <br> <u> Note</u>: All the functionalities that demo supports (and some more) are implemented as modules so anybody can use them independently. <br>
+        Those modules are extensively discussed in the <a href="#deliverables">deliverables</a> section. The central idea is that this Google Summer of Code project should produce results that are going to be used later on from people all around the world.
+        For that reason, together with my mentor, Markos Gogoulos, we have implemented an API for the Demo so anybody can access the results that it provides (see more <a href="https://github.com/eellak/nlpbuddy/wiki/API-usage" target="_blank">here</a>).
       </p>
 
-      <h3 class="wow" id="greek-spacy">Addition of Greek language support to spaCy.</h3>
 
-      <p class="gsoc-p">
 
-        Greek language has been successfully integrated to spaCy, which was actually the most important goal of the project.
+<br> <br>
 
-        <br> <br> You can see the pull request <a href="https://github.com/explosion/spaCy/pull/2558" target="_blank"> here </a>. <br> <br> Each part of the process of integrating Greek language to spaCy is discussed in detail in the <a target="_blank"
-          href="https://github.com/eellak/gsoc2018-spacy/wiki">Wiki</a> page of the project.
-
-        <br> <br> During the development part for the integration of Greek language to spaCy, some submodules were produced that can be used indendently. There is a reference to these submodules, in the <a href="#deliverables">deliverables section </a>        of this report page.
-
-      </p>
-
-      <h3 id="greek-models"> Greek language models </h3>
-
-      <p class="gsoc-p"> Two models for Greek language have been produced. There is an ongoing process of uploading them to spaCy. After that, you will be able to install them with the folllowing commands: </p>
-      <xmp>
-        python3 -m spacy download el_core_web_sm python3 -m spacy download el_core_web_lg
-      </xmp>
-      <p class="gsoc-p">
-        Greek language models support all the capabilities that you will find in the <a href="#deliverables">deliverables</a> section. Sentence splitting, tokenization, Part Of Speech Tagging, Syntax Analysis using DEP tags, Named Entities Recognition,
-        lexical attributes extraction, norm exceptions and stop-words lists, are all included the Greek language models. The big Greek model (el_core_web_lg) includes word vectors so it supports features such as similarity detection between texts.
-        <br> <br> You can find more about the models production, usage and maintenance, in the <a target="_blank" href="https://github.com/eellak/gsoc2018-spacy/wiki/models">models page of the wiki</a>.
-        <br><br> Some visualizations from the models usage:
-      </p>
-      <div class="tc">
-        <img class="wow slideInLeft" src="../../static/img/gsoc-images/pos1.png">
-        <img class="wow slideInUp" src="../../static/img/gsoc-images/ner1.png">
-        <img class="wow slideInLeft" src="../../static/img/gsoc-images/pos2.png">
-        <img class="wow slideInUp" src="../../static/img/gsoc-images/ner2.png">
-      </div>
-
-      <h3 id="spacy">Improvements in spaCy</h3>
+      <h3 id="spacy"><i class="v-mid di material-icons">
+arrow_right_alt
+</i> Improvements in spaCy</h3>
       <p class="gsoc-p">
         A side goal of the project is to empower spaCy itself. There is an open-dialogue with the creators of spaCy, who we would like to thank for their continuous support and enthusiasm.
       </p>
-      <h4> Documentation Improvements </h4>
+
+      <div class="mh4">
+      <h4><i class="v-mid di material-icons">
+crop_square
+</i> Documentation Improvements </h4>
       <p class="gsoc-p">
         A pull request for documentation improvements was successfully merged.
         <br> <br> The pull request was about a small error found in the spaCy documentation in the pseudocode provided for overriding the spaCy tokenizer.
         <br> <br> You can see the pull request <a target="_blank" href="https://github.com/eellak/gsoc2018-spacy#models">here</a>.
       </p>
-      <h4> Sharing awareness </h4>
+      <h4> <i class="v-mid di material-icons">
+crop_square
+</i> Sharing awareness </h4>
       <p class="gsoc-p">
 
-        There is an ongoing process of writing an article for <a target="_blank" href="https://explosion.ai/blog/"> Explosion AI Blog </a> regarding the integration of Greek language to spaCy.
+        I am invited to write an article for <a target="_blank" href="https://explosion.ai/blog/"> Explosion AI Blog </a> regarding the integration of Greek language to spaCy due to the innovative approaches followed during Google Summer of Code 2018.
+        There is an ongoing process of writing and evaluation of this article till its' publication which may be after the end of Google Summer of Code.
         <br> <br> A link to the post will be published here when it's ready.
       </p>
-      <h4> Innovative approaches </h4>
+      <h4> <i class="v-mid di material-icons">
+crop_square
+</i> Innovative approaches </h4>
       <p class="gsoc-p">
         In the process of integrating Greek language to spaCy some new approaches are followed. Hopefully, these approaches will inspire other languages too.
         <ul>
@@ -229,9 +313,10 @@
           <li class="gsoc-li"> There were no available data for training NER classifier, so there was a need for creating data. A fast procedure of annotating data using Prodigy annotation tool is proposed for future reference.</li>
         </ul>
       </p>
+    </div>
+</div>
 
-
-      <h3 id="deliverables"> Deliverables </h3>
+      <h2 id="deliverables"> Deliverables </h2>
       <p class="gsoc-p">
         Deliverables are independent functionality submodules or/and useful resources that were produced either during the process of integrating Greek language to spaCy or during the process of experimenting with the functionalities of spaCy and the demo implementation.
         <br> <br> A list of the deliverables and a short description of each of them follows. You can find the functionality submodules in the res/modules folder of the project repo (<a href="https://github.com/eellak/gsoc2018-spacy/tree/5ca7746630a3a985da6ccfd48a51be74e8c7d44a/spacy/lang/el/res/modules"
@@ -427,7 +512,7 @@ __________________|______
       </ol>
 
 
-      <h3 id="future"> Future Work </h3>
+      <h2 id="future"> Future Work </h2>
       <p class="gsoc-p">
         In this section, some suggestions for future work are listed. There are difficulty labels assigned to each task and some guidelines to start with. There are also labels which explain if each task refers to the improvement of Greek language support or
         to the addition/improvement of a general nlp task. For more info on contribution, you can always have a look at the <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Contribute" target="_blank"> contribute page </a> of the project
@@ -455,9 +540,7 @@ __________________|______
           <li class="gsoc-li">Transform the tokens that match one of the phenomena mentioned above, to other(s) tokens using transformation rules. </li>
         </ol>
 
-        <br> <br>
-        <li class="gsoc-li">Add noun chunks. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span> <span class="ph2 pv1 br2 bg-black white"> Difficulty: medium </span></li>
-        </li>
+
 
         <br> <br>
         <li class="gsoc-li">Improve models accuracy. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span> <span class="ph2 pv1 br2 bg-black white"> Difficulty: medium </span></li> <br> <br>
@@ -470,12 +553,11 @@ __________________|______
 
       </ul>
 
-      <h3 id="people"> People </h3>
+      <h2 id="people"> People </h2>
 
       <p class="gsoc-p">
-        <!-- TODO add links -->
         <ul>
-          <li class="gsoc-li"> Google Summer of Code 2018 Student: <b>Ioannis Daras</b>
+          <li class="gsoc-li"> Google Summer of Code 2018 Student: <b>Ioannis Daras</b><a href="https://github.com/giannisdaras" target="_blank"><i class="ph1 fa fa-github"></i></a> <a href="https://linkedin.com/in/ioannis-daras" target="_blank"><i class="ph1 fa fa-linkedin"></i></a> <a href="https://giannisdaras.github.io/" target="_blank"><i class="ph1 fa fa-link"></i></a>
           </li>
           <li class="gsoc-li"> Mentor: <b>Markos Gogoulos</b></li>
           <li class="gsoc-li"> Mentor: <b>Panos Louridas</b></li>
