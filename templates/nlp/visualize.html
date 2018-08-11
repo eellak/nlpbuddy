@@ -1,30 +1,45 @@
-{% extends "base.html" %}
+{% load static %}
 
+<!DOCTYPE html>
 
-{% block scripts %}
-<script>
-var displacy = new displaCy('/visualize', {
-    container: '#displacy',
-    format: 'spacy',
-    distance: 300,
-    offsetX: 100
-})
-var markup = {{json|safe}}
+<head>
+  <meta charset="utf-8" />
+  <title>Open Source Text Analysis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="{% static "img/favicon.png" %}" rel="icon" type="image/png" />
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&amp;subset=greek" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="{% static "css/style.css" %}" rel="stylesheet" />
+  <style>
+    body {
+      background-color: white;
+    }
+  </style>
+  <script src="{% static "js/displacy.js" %}"></script>
+  <script src="{% static "js/jquery.min.js" %}"></script>
+</head>
 
-displacy.render(markup,{
-  container : '#displacy',
-  format : 'google',
-  distance : '5px',
-  arrowSpacing : '5px',
-  wordSpacing: '10px'
-});
+<body>
 
+  <div id="displacy">
+  </div>
 
-</script>
-{% endblock %}
+  <script>
+    var displacy = new displaCy('/visualize', {
+      container: '#displacy',
+      format: 'spacy',
+      distance: 300,
+      offsetX: 100
+    })
+    var markup = {{json|safe}}
 
-{% block content %}
+    displacy.render(markup, {
+      container: '#displacy',
+      format: 'google',
+      distance: '5px',
+      arrowSpacing: '5px',
+      wordSpacing: '10px'
+    });
+  </script>
 
-<div id="displacy">
-</div>
-{% endblock %}
+</body>

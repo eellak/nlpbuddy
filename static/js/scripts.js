@@ -155,6 +155,8 @@ function TextAnalyzerEditor() {
             case 'various':
                 w = 'undefined' !== typeof val.language ? '<li><label>' + i18n.Languague + ':</label>' + val.language + '</li>' : '';
                 w += 'undefined' !== typeof val.category ? '<li><label>' + i18n.Category + ':</label>' + val.category + '</li>' : '';
+                w += 'undefined' !== typeof val.emotion_name ? '<li><label>' + 'Emotion' + ':</label>' + val.emotion_name + '</li>' : '';
+                w += 'undefined' !== typeof val.subjectivity ? '<li><label>' + 'Subjectivity' + ':</label>' + val.subjectivity + '% </li>' : '';
                 w = '' === w ? w : '<ul>' + w + '</ul>';
                 ins.elem.boxes.variousContent.innerHTML = w;
                 break;
@@ -250,15 +252,61 @@ function TextAnalyzerEditor() {
                 }
                 ins.elem.boxes.tokensContent.innerHTML = w;
                 break;
+            case 'noun_chunks':
+                w = '';
+                i = 0;
+                while (i < val.length) {
+                    w += '<span>' + val[i].trim() + '</span>';
+                    i += 1;
+                }
+                ins.elem.boxes.chunksContent.innerHTML = w;
+                break;
             case 'sentences':
                 w = '';
                 i = 0;
                 while (i < val.length) {
-                    w += '<li style="list-style-type: none;"> <input checked style="margin-right:1rem" type="radio" value="'+ val[i].trim()+'" name=sentences' + '>' + val[i].trim() + '</input> </li>';
-                    i += 1;
+                  w += '<li>' + val[i].trim() + '<a href="#" style="text-decoration:none" onclick="trigger(this)" id="' + val[i].trim() + '"><i style="margin-left: 0.5rem; vertical-align: middle; display: inline" class="material-icons">remove_red_eye</i></a></li>';
+                  i += 1;
                 }
                 w = '' === w ? w : '<ol>' + w + '</ol>';
                 ins.elem.boxes.sentencesContent.innerHTML = w;
+                break;
+            case 'lexical_attrs':
+                w = '';
+                if ('undefined' !== typeof val.urls && val.urls.length) {
+                    d = '';
+                    i = 0;
+                    while (i < val.urls.length) {
+                        d += '<span>' + val.urls[i] + '</span>';
+                        i += 1;
+                    }
+                    w += '<li><label>' + 'Urls' + '</label><div class="verbs">' + d + '</div></li>';
+                }
+
+                if ('undefined' !== typeof val.emails && val.emails.length) {
+                    d = '';
+                    i = 0;
+                    while (i < val.emails.length) {
+                        d += '<span>' + val.emails[i] + '</span>';
+                        i += 1;
+                    }
+                    w += '<li><label>' + 'Emails' + '</label><div class="adjectives">' + d + '</div></li>';
+                }
+
+                if ('undefined' !== typeof val.nums && val.nums.length) {
+                    d = '';
+                    i = 0;
+                    while (i < val.nums.length) {
+                        d += '<span>' + val.nums[i] + '</span>';
+                        i += 1;
+                    }
+                    w += '<li><label>' + 'Numericals' + '</label><div class="nouns">' + d + '</div></li>';
+
+                }
+
+                w = '' === w ? w : '<ul>' + w + '</ul>';
+
+                ins.elem.boxes.lexicalAttributesContent.innerHTML = w;
                 break;
 
         }
@@ -266,13 +314,14 @@ function TextAnalyzerEditor() {
 
     function responseTextAnalysis(result) {
         load_results('text', result.text || '');
-        load_results('various', { language: result.language, category: result.category });
+        load_results('various', { language: result.language, category: result.category, emotion_name: result.emotion_name, emotion_score: result.emotion_score, subjectivity: result.subjectivity});
         load_results('keywords', result.keywords && ( '' !== result.keywords ? result.keywords.split(',') : [] ) );
         load_results('summary', result.summary || '');
         load_results('entities', result.named_entities);
         load_results('part_of_speech', result.part_of_speech);
         load_results('tokens', result.text_tokenized || []);
-
+        load_results('lexical_attrs', result.lexical_attrs);
+        load_results('noun_chunks', result.noun_chunks);
         load_results('sentences', result[ ins.states.lemmatizedSentences ? 'lemmatized_sentences' : 'sentences' ] );
 
         fnc.dom.addClass(ins.elem.body, 'has-results');
@@ -344,7 +393,9 @@ function TextAnalyzerEditor() {
         summaryContent: document.querySelector('.results-box.summary .rb-content'),
         entitiesContent: document.querySelector('.results-box.entities .rb-content'),
         partOfSpeechContent: document.querySelector('.results-box.part-of-speech .rb-content'),
+        lexicalAttributesContent: document.querySelector('.results-box.lexical-attrs .rb-content'),
         tokensContent: document.querySelector('.results-box.tokens .rb-content'),
+        chunksContent: document.querySelector('.results-box.noun-chunks .rb-content'),
         sentencesContent: document.querySelector('.results-box.sentences .rb-content')
     };
 

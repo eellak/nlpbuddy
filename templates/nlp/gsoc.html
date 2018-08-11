@@ -1,0 +1,513 @@
+{% extends "base.html" %} {% block content %}
+
+<main>
+
+  <div class="w-100 w-80-l">
+    <h1 class="wow">Addition of Greek language to spaCy - GSOC 2018</h1>
+    <p class="gsoc-p wow ">NLPBuddy is a side result of the project <i> "Addition of Greek language to spaCy"</i> for <b> Google Summer of Code 2018.</b> <br> <br> This page serves as a report for the <b> Google Summer of Code 2018 Project</b>. The project was developed under
+      the auspices of <b> GFOSS - Open Technologies Alliance. </b> <br> <br>
+      <h2> Report Contents </h2>
+      <ul class="wow">
+        <li class="gsoc-li dim"><a href="#repos"> Repositories and Wiki </a> </li>
+        <li class="gsoc-li dim"><a href="#problem-statement"> Problem Statement and Project Goals </a> </li>
+        <li class="gsoc-li dim"><a href="#results"> Results - Production Ready Tools </a> </li>
+        <ul>
+          <li class="gsoc-p dim"><a href="#NLPBuddy"> NLPBuddy - Open Source Text Analysis Tool </a></li>
+          <li class="gsoc-p dim"><a href="#greek-spacy"> Integration of Greek language to spaCy - Merged Pull Request</a></li>
+          <li class="gsoc-p dim"><a href="#greek-models"> Greek language models </a></li>
+          <li class="gsoc-p dim"><a href="#spacy"> Empowerment of spaCy </a></li>
+        </ul>
+        <li class="gsoc-li dim"><a href="#deliverables"> Deliverables </a></li>
+
+        <ul>
+          <li class="gsoc-p dim"><a href="#tokenizer">Tokenizer</a></li>
+          <li class="gsoc-p dim"><a href="#lemmatizer"> Lemmatizer </a></li>
+          <li class="gsoc-p dim"><a href="#splitter"> Sentence splitter </a></li>
+          <li class="gsoc-p dim"><a href="#stop-words"> Stop words </a></li>
+          <li class="gsoc-p dim"><a href="#norms"> Norm exceptions </a></li>
+
+          <li class="gsoc-p dim"><a href="#lex_attrs"> Lexical Attributes </a></li>
+          <li class="gsoc-p dim"><a href="#pos"> POS Tagger </a></li>
+          <li class="gsoc-p dim"><a href="#dep"> DEP Tagger </a></li>
+          <li class="gsoc-p dim"><a href="#ner"> NER Tagger </a></li>
+          <li class="gsoc-p dim"><a href="#emotion"> Sentiment Analyzer </a></li>
+          <li class="gsoc-p dim"><a href="#topic"> Topic classifier </a></li>
+        </ul>
+
+        <li class="gsoc-li dim"><a href="#future"> Future Work </a></li>
+        <li class="gsoc-li dim"><a href="#people"> People </a></li>
+      </ul>
+
+    </p>
+
+    <br> <br>
+
+    <h2 class="wow" id="repos"> Repositories and Wiki </h2>
+    <p class="gsoc-p"> This section contains some useful links/resources for the project. <br> <br>
+
+      <ul>
+        <li class="gsoc-li">The first link is the project repository where you can all the work that is related to the integration of Greek language to spaCy platform. <br>
+        </li>
+        <li class="gsoc-li"> The second link is the NLPBuddy repository in which you can find all the work related to the implementation of an opensource demo on top of spaCy that demonstrates and performs free and for all common NLP tasks in 7 languages, including Greek.
+          </li>
+
+        <li class="gsoc-li"> The third link is the project wiki in which you will find detailed and explanatory documentation for everything related to the integration of Greek language to spaCy.
+        </li>
+
+        <li class="gsoc-li"> The fourth link is the demo wiki in which you will find detailed and explanatory documentation about everything related to the implementation, the usage and the reproduction of the demo.</li>
+
+      </ul>
+      <br> <br>
+      <div class="wow zoomInRight">
+        <div class="github-card" data-github="eellak/gsoc2018-spacy" data-width="400" data-height="151" data-theme="default"></div>
+        <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+
+
+        <div class="github-card" data-github="eellak/text-analysis" data-width="400" data-height="" data-theme="default"></div>
+        <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+
+        <br>
+        <article class="br2 ba dark-gray b--black-10 mv4 mw5 dib">
+          <a target="_blank" href="https://github.com/eellak/gsoc2018-spacy/wiki">
+<img src="https://s.hswstatic.com/gif/wiki-ch.jpg" class="db w-100 br2 br--top" alt="Project wiki">
+</a>
+          <div class="pa2 ph3-ns pb3-ns">
+            <div class="dt w-100 mt1">
+              <div class="dtc">
+                <h1 class="f5 f4-ns mv0">Project wiki</h1>
+              </div>
+            </div>
+            <p class="f6 lh-copy measure mt2 mid-gray">
+              Extensive documentation about the integration of Greek language to spaCy.
+            </p>
+          </div>
+
+        </article>
+
+
+        <article class="br2 ba dark-gray b--black-10 mv4 mw5 dib">
+          <a target="_blank" href="https://github.com/eellak/text-analysis/wiki">
+<img src="https://s.hswstatic.com/gif/wiki-ch.jpg" class="db w-100 br2 br--top" alt="Demo wiki">
+</a>
+          <div class="pa2 ph3-ns pb3-ns">
+            <div class="dt w-100 mt1">
+              <div class="dtc">
+                <h1 class="f5 f4-ns mv0">Demo wiki</h1>
+              </div>
+            </div>
+            <p class="f6 lh-copy measure mt2 mid-gray">
+              Extensive documentation about the implementation, the usage and the reproduction of the demo.
+            </p>
+          </div>
+
+        </article>
+
+      </div>
+      <h2 class="wow" id="problem-statement"> Problem Statement - Project Goals </h2>
+      <p class="wow gsoc-p">
+        We live in the era of data. <b>Every minute</b>, 3.8 billion internet users, produce content; more than 120 million emails , 500.000 Facebook comments, 3 million Google searches. If we want to process that amount of data efficiently, we need to
+        process natural language. Open source projects such as spaCy, textblob, or NLTK contribute significantly to that direction and thus they need to be reinforced.
+
+        <br> <br> This project is about improving the quality of Natural Language Processing of Greek Language.
+        <br> <br> The project goals can be categorized as following:
+        <ol>
+          <li class="gsoc-li"> Integration of Greek language to spaCy platform <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li>
+          <li class="gsoc-li"> Production of models for Part-Of-Speech (POS) tagging, Dependency Analysis (DEP) and Named Entities Recognition (NER), with and without vectors. <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li>
+          <li class="gsoc-li"> An open-source text analysis tool (demo) in which everyone can perform common NLP tasks in 7 languages. <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li>
+        </ol>
+      </p>
+
+
+      <br> <br>
+
+      <h2 class="wow" id="results"> Results - Production ready tools</h2>
+
+
+      <h3 id="NLPBuddy"> NLPBuddy - Open Source Text Analysis Tool </h3>
+
+      <p class="gsoc-p">
+        The first to mention outcome of the project is <b> NLPBuddy </b>. </p>
+      <div class="w-40">
+        <a href="/" target="_blank" class="wow slideInLeft boton w">
+  Try it
+  </a>
+      </div>
+
+      <p class="gsoc-p">
+        NLPBuddy is an open-source text analysis tool that has been developed as a demonstration of the project results. <br> <br> NLPBuddy leverages <a target="_blank" href="https://spacy.io/"> Spacy's </a> capabilities to extract as much information
+        as possible from a raw text.
+
+      </p>
+
+
+
+
+
+
+
+      <p class="gsoc-p"> Briefly, in this demo you can perform the following tasks with your text in <b> 7 languages</b>: </p>
+      <ol>
+        <li class="gsoc-li"> Language identification (performed using langid library). </li>
+        <li class="gsoc-li"> Text tokenization. </li>
+        <li class="gsoc-li"> Sentence splitting. </li>
+        <li class="gsoc-li"> Lemmatization. </li>
+        <li class="gsoc-li"> Part of Speech tags identification. </li>
+        <li class="gsoc-li"> Named Entity Recognition (Location, Person, Organization). </li>
+        <li class="gsoc-li"> Text summarization (uses Gensim's implementation of the TextRank algorithm). </li>
+        <li class="gsoc-li"> Keywords extraction. </li>
+        <li class="gsoc-li"> For the Greek language, there are also the following bonus features:
+          <ul>
+            <li class="gsoc-li"> <b> Text Categorization </b> among the following categories: Sports, Science, World News, Greek News, Environment, Politics, Art, Health, Science. <br> The Greek classifier is built with FastText and is trained in 20.000 articles labeled in
+              these categories. <br>
+              <b> Accuracy reaches 90% </b>.</li>
+            <li class="gsoc-li"> Text subjectivity analysis. </li>
+            <li class="gsoc-li"> Emotion analysis. It detects the main text emotion among the following emotions: Anger, Disgust, Fear, Happiness, Sadness, Surprise. </li>
+          </ul>
+        </li>
+
+      </ol>
+
+      <p class="gsoc-p"> The supported languages at the moment are the following: Greek, English, German, Spanish, Portuguese, French, Italian and Dutch.
+
+        <br> <br> Text can either be provided or imported from a URL. For the preprocess of the text imported from url, the following libraries are used: python readability, BeautifulSoup4.
+
+      </p>
+
+      <h3 class="wow" id="greek-spacy"> Integration of Greek language to spaCy.</h3>
+
+      <p class="gsoc-p">
+
+        Greek language has been successfully integrated to spaCy, which was actually the most important goal of the project.
+
+        <br> <br> You can see the pull request <a href="https://github.com/explosion/spaCy/pull/2558" target="_blank"> here </a>. <br> <br> Each part of the process of integrating Greek language to spaCy is discussed in detail in the <a target="_blank"
+          href="https://github.com/eellak/gsoc2018-spacy/wiki">Wiki</a> page of the project.
+
+        <br> <br> During the development part for the integration of Greek language to spaCy, some submodules were produced that can be used indendently. There is a reference to these submodules, in the <a href="#deliverables">deliverables section </a>        of this report page.
+
+      </p>
+
+      <h3 id="greek-models"> Greek language models </h3>
+
+      <p class="gsoc-p"> Two models for Greek language have been produced. There is an ongoing process of uploading them to spaCy. After that, you will be able to install them with the folllowing commands: </p>
+      <xmp>
+        python3 -m spacy download el_core_web_sm python3 -m spacy download el_core_web_lg
+      </xmp>
+      <p class="gsoc-p">
+        Greek language models support all the capabilities that you will find in the <a href="#deliverables">deliverables</a> section. Sentence splitting, tokenization, Part Of Speech Tagging, Syntax Analysis using DEP tags, Named Entities Recognition,
+        lexical attributes extraction, norm exceptions and stop-words lists, are all included the Greek language models. The big Greek model (el_core_web_lg) includes word vectors so it supports features such as similarity detection between texts.
+        <br> <br> You can find more about the models production, usage and maintenance, in the <a target="_blank" href="https://github.com/eellak/gsoc2018-spacy/wiki/models">models page of the wiki</a>.
+        <br><br> Some visualizations from the models usage:
+      </p>
+      <div class="tc">
+        <img class="wow slideInLeft" src="../../static/img/gsoc-images/pos1.png">
+        <img class="wow slideInUp" src="../../static/img/gsoc-images/ner1.png">
+        <img class="wow slideInLeft" src="../../static/img/gsoc-images/pos2.png">
+        <img class="wow slideInUp" src="../../static/img/gsoc-images/ner2.png">
+      </div>
+
+      <h3 id="spacy"> Empowerment of spaCy </h3>
+      <p class="gsoc-p">
+        A side goal of the project is to empower spaCy itself. There is an open-dialogue with the creators of spaCy, who we would like to thank for their continuous support and enthusiasm.
+      </p>
+      <h4> Documentation Improvements </h4>
+      <p class="gsoc-p">
+        A pull request for documentation improvements was successfully merged.
+        <br> <br> The pull request was about a small error found in the spaCy documentation in the pseudocode provided for overriding the spaCy tokenizer.
+        <br> <br> You can see the pull request <a target="_blank" href="https://github.com/eellak/gsoc2018-spacy#models">here</a>.
+      </p>
+      <h4> Sharing awareness </h4>
+      <p class="gsoc-p">
+
+        There is an ongoing process of writing an article for <a target="_blank" href="https://explosion.ai/blog/"> Explosion AI Blog </a> regarding the integration of Greek language to spaCy.
+        <br> <br> A link to the post will be published here when it's ready.
+      </p>
+      <h4> Innovative approaches </h4>
+      <p class="gsoc-p">
+        In the process of integrating Greek language to spaCy some new approaches are followed. Hopefully, these approaches will inspire other languages too.
+        <ul>
+          <li class="gsoc-li"> Greek language is the second language that follows a rule based lemmatization procedure.</li>
+          <li class="gsoc-li"> There were no available data for training NER classifier, so there was a need for creating data. A fast procedure of annotating data using Prodigy annotation tool is proposed for future reference.</li>
+        </ul>
+      </p>
+
+
+      <h3 id="deliverables"> Deliverables </h3>
+      <p class="gsoc-p">
+        Deliverables are independent functionality submodules or/and useful resources that were produced either during the process of integrating Greek language to spaCy or during the process of experimenting with the functionalities of spaCy and the demo implementation.
+        <br> <br> A list of the deliverables and a short description of each of them follows. You can find the functionality submodules in the res/modules folder of the project repo (<a href="https://github.com/eellak/gsoc2018-spacy/tree/5ca7746630a3a985da6ccfd48a51be74e8c7d44a/spacy/lang/el/res/modules"
+          target="_blank">here</a>), serving as examples for usage.
+        <br> <br> Each of the deliverables is labelled with one of the following tags:
+        <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span>, <span class="ph2 pv1 br2 bg-green white">nlp-task</span>, <span class="ph2 pv1 br2 bg-yellow white">resource</span>.
+
+      </p>
+      <ul>
+        <li class="gsoc-li"> greek-spacy-support tag stands for modules that were required for the integration of Greek language to spaCy. </li>
+        <li class="gsoc-li"> nlp-task stands for submodules that provide useful functionalities for some nlp task. Those modules may be implemented for more than one languages or only for Greek language. </li>
+        <li class="gsoc-li"> resource is a tag that stands for useful resources for greek language that can be datasets that were created during the processs of integrating Greek language to spaCy. </li>
+
+
+      </ul>
+      <p class="gsoc-p">If you want to learn more, there is an individual page for each of them in the <a href="https://github.com/eellak/gsoc2018-spacy/wiki" target="_blank">project wiki</a> or the <a href="https://github.com/eellak/text-analysis/wiki" target="_blank">demo wiki</a>.
+        <br> <br> </p>
+
+      <b>Deliverables list:</b>
+
+
+      <ol>
+        <li id="tokenizer" class="gsoc-li">Tokenizer. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span><br> <br> You can use this submodule having one of the produced greek models in order to <b> split </b> your sentence(s) to <b>tokens</b>, independently of the others
+          spaCy modules.
+          <br> <br> Sample input: <i> Θέλω να μου σπάσεις αυτήν την πρόταση σε κομμάτια</i><br> Sample output: <i>[Θέλω, να, μου, σπάσεις, αυτήν, την, πρόταση, σε, κομμάτια] </i>
+          <br> <br> Submodule <a href="https://github.com/eellak/gsoc2018-spacy/blob/dev/spacy/lang/el/res/modules/tokenizer.py" target="_blank">link</a>.
+          <br> <br>
+        </li>
+
+        <li class="gsoc-li" id="lemmatizer">Lemmatizer. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span> <br> <br> This submodule is for <b>sentences lemmatization</b>. <br> <br> Sample input: <i> Τα σύμβολα του αγώνα.</i> <br> <br> Sample output: <i>
+  <xmp>
+    Original token: Τα , Lemma: τα
+    Original token: σύμβολα , Lemma: σύμβολο
+    Original token: του , Lemma: του
+    Original token: αγώνα , Lemma: αγώνα
+    Original token: . , Lemma: .
+  </xmp>
+  </i>
+          <br> <br> Greek lemmatizer is special because it follows a rule based approach. You can find extensive documentation about lemmatizer in the corresponding wiki <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Lemmatizer" target="_blank">page</a>.
+          Submodule <a href="https://github.com/eellak/gsoc2018-spacy/blob/dev/spacy/lang/el/res/modules/lemmatizer.py" target="_blank">link</a>.
+          <br> <br>
+        </li>
+
+
+        <li id="splitter" class="gsoc-li">Sentence Splitter. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span><br> <br> You can use this submodule using one of the produced greek models in order to <b>split sentences</b> in a greek text independently of the rest of
+          the spaCy modules.
+
+          <br> <br> Sample input: <i>
+  Αυτή είναι μια πρόταση. Αυτή είναι μια δεύτερη πρόταση. Και αυτή μια τρίτη πρόταση. </i>
+          <br> <br> Sample output: <br>
+          <i>  [ Αυτή είναι μια πρόταση.,
+   Αυτή είναι μια δεύτερη πρόταση.,
+   Και αυτή μια τρίτη πρόταση.]
+  </i>
+          <br> <br> Submodule <a href="https://github.com/eellak/gsoc2018-spacy/blob/dev/spacy/lang/el/res/modules/sentence_splitter.py" target="_blank">link</a>.
+        </li>
+        <br> <br>
+        <li id="stop-words" class="gsoc-li">Stop words list. <span class="ph2 pv1 br2 bg-yellow white">resource</span> <br> <br>
+
+          <div class="wow slideInLeft">
+            <img class="m0 p0" src="../../static/img/gsoc-images/stop-words.png">
+            <blockquote class="w-50-l w-50 fr dib absolute">
+              <div class="bl black  bw1">
+                <p class="mh2"> In computing, stop words are words which are filtered out before or after processing of natural language data. Though "stop words" usually refers to the most common words in a language, there is no single universal list of stop words used
+                  by all natural language processing tools, and indeed not all tools even use such a list. Some tools specifically avoid removing these stop words to support phrase search. </p>
+              </div>
+            </blockquote>
+          </div>
+
+          <p class="gsoc-p"> The stop-words wiki page is available <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Stop-words" target="_blank"> here.</a> The final list with the stop-words of Greek language can be found <a href="https://github.com/explosion/spaCy/blob/master/spacy/lang/el/stop_words.py"
+              target="_blank">here</a>.</p>
+
+          <br> <br>
+        </li>
+        <li id="norms" class="gsoc-li"> Norm exceptions list. <span class="ph2 pv1 br2 bg-yellow white">resource</span><br> <br>
+
+          <div class="wow slideInLeft">
+            <img class="m0 p0" src="../../static/img/gsoc-images/spelling.png">
+            <blockquote class="w-50-l w-50 fr dib absolute">
+              <div class="bl black  bw1">
+                <p class="mh2"> spaCy usually tries to normalise words with different spellings to a single, common spelling. This has no effect on any other token attributes, or tokenization in general, but it ensures that equivalent tokens receive similar representations.
+                  This can improve the model's predictions on words that weren't common in the training data, but are equivalent to other words – for example, "realize" and "realise", or "thx" and "thanks". </p>
+              </div>
+            </blockquote>
+          </div>
+
+          <p class="gsoc-p"> The norm-exceptions wiki page is available <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Norm-exceptions" target="_blank"> here.</a> The final list with the stop-words of Greek language can be found <a href="https://github.com/explosion/spaCy/blob/master/spacy/lang/el/norm_exceptions.py"
+              target="_blank">here</a>.</p>
+          <br> <br>
+        </li>
+        <li class="gsoc-li" id="lex_attrs">Lexical Attributes Functions. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span> <br> <br> Each token of a spaCy doc is checked against some potential attributes. In this way, <b>urls, nums and other types of special tokens </b>          can be
+          <b>seperated</b> from the normal tokens. <br> <br> Sample input: <i>Η ιστοσελίδα για το demo μας είναι: https://nlp.wordames.gr</i> <br> <br> Sample output: <i>Url: https://nlp.wordames.gr
+  </i> <br> <br> Submodule <a href="https://github.com/eellak/gsoc2018-spacy/blob/dev/spacy/lang/el/res/modules/lexical_attrs.py" target="_blank">link</a>.
+
+          <br> <br>
+        </li>
+        <li id="pos" class="gsoc-li">Part of Speech Tagger. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span> <br> <br> You can use this submodule having one of the produced greek models in order to get <b> part of speech tags for your tokens</b>, independently
+          of the others spaCy modules.
+          <br> <br> Sample input: <i>Η δημοκρατία είναι το πιο ανθρώπινο πολίτευμα. </i><br><br> Sample output: <i>
+  <xmp>
+    Token: Η Tag: DET
+    Token: δημοκρατία Tag: NOUN
+    Token: είναι Tag: AUX
+    Token: το Tag: DET
+    Token: πιο Tag: ADV
+    Token: ανθρώπινο Tag: ADJ
+    Token: πολίτευμα Tag: NOUN
+    Token: . Tag: PUNCT
+  </xmp> </i> Visualized output using displaCy:
+          <img class="wow rotateIn m0 p0" src="../../static/img/gsoc-images/pos.png">
+          <br> For extensive documentation of POS tagger for Greek language, check the corresponding wiki <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Part-Of-Speech" target="_blank">page</a>. Submodule <a href="https://github.com/eellak/gsoc2018-spacy/blob/dev/spacy/lang/el/res/modules/pos.py"
+            target="_blank">link</a>.
+          <br> <br>
+        </li>
+        <li id="dep" class="gsoc-li">DEP Tagger. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span> <br> <br> You can use this submodule having one of the produced greek models in order to <b> analyze syntax </b> of your text, independently of the others spaCy modules.
+          <br> <br>
+          <ul>
+            <li class="gsoc-li">Get DEP tags.</li>
+            <br> Sample input: <i>Η δημοκρατία είναι το πιο ανθρώπινο πολίτευμα.</i> <br> <br> Sample output: <i>
+      <xmp>
+      Token:η, DEP tag: det
+      Token:δημοκρατία, DEP tag: nsubj
+      Token:είναι, DEP tag: cop
+      Token:το, DEP tag: det
+      Token:πιο, DEP tag: advmod
+      Token:ανθρώπινο, DEP tag: amod
+      Token:πολίτευμα, DEP tag: ROOT
+      Token:., DEP tag: punct
+
+    </xmp>
+  </i>
+            <li class="gsoc-li">Navigate/Visualize the DEP tree.</li>
+            <br> <br> Sample input: <i>Ο Κώστας αγόρασε πατάτες και τις άφησε πάνω στο ψυγείο.</i> <br> <br> Sample output:
+
+
+              <xmp>
+              αγόρασε
+__________________|______
+|       |    |            άφησε
+|       |    |        ______|__________
+|       |  Κώστας    |      |    |   ψυγείο
+|       |    |       |      |    |     |
+πατάτες .    Ο      και    τις  πάνω  στο
+    </xmp>
+
+            </xmp>
+
+            Visualization code <a href="https://stackoverflow.com/questions/36610179/how-to-get-the-dependency-tree-with-spacy" target="_blank">source</a>. Submodule <a target="_blank" href="https://github.com/eellak/gsoc2018-spacy/blob/dev/spacy/lang/el/res/modules/dep.py">link.</a>
+
+          </ul>
+          <br> <br>
+          <br> <br>
+        </li>
+        <li id="ner" class="gsoc-li">NER Tagger. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span> <br> <br></li>
+
+        <img class="wow slideInLeft m0 p0" src="../../static/img/gsoc-images/ner.png">
+        <blockquote>
+          <div class="bl black gsoc-p bw1">
+            <p class="mh2"> Named-entity recognition (NER) (also known as entity identification, entity chunking and entity extraction) is a subtask of information extraction that seeks to locate and classify named entities in text into pre-defined categories such as
+              the names of persons, organizations, locations, expressions of times, quantities, monetary values, percentages, etc.</p>
+          </div>
+        </blockquote>
+        <br> <br>
+        <p class="gsoc-p">
+          The greek language models support the following NER tags: <i>ORG, PERSON, LOC, GPE, EVENT, PRODUCT</i>. Having one of the greek models, you can use the NER tagger:
+          <br> <br> Sample Input: <i> Η εταιρεία Google έχει τα γραφεία της στην Καλιφόρνια. </i> <br> <br> Sample Output: <i> Entity:Google, Label:ORG, Entity:Καλιφόρνια, Label:GPE </i> <br> <br>
+        </p>
+
+        <p class="gsoc-p"> Visualization using displaCy: </p> <br>
+        <img class="wow slideInLeft m0 p0" src="../../static/img/gsoc-images/ner3.png">
+
+        <p class="gsoc-p">
+          For extensive documentation of NER tagger for Greek language, check the corresponding wiki <a href="https://github.com/eellak/gsoc2018-spacy/wiki/NER" target="_blank">page</a>. Submodule <a href="https://github.com/eellak/gsoc2018-spacy/blob/dev/spacy/lang/el/res/modules/ents.py"
+            target="_blank">link</a>. </p>
+        <br>
+        <li class="gsoc-li" id="emotion">Sentiment Analyzer. <span class="ph2 pv1 br2 bg-green white">nlp-task</span> <br> <br> This submodule gives you a <b> subjectivity score </b> for your text and an <b> emotion analysis </b>. <br> <br> Sample input: <i>Έχω μείνει έκπληκτος! Πώς γίνεται αυτό; Η έκπληξη είναι τόσο μεγάλη! Α, τώρα εξηγούνται όλα.</i>          <br> <br> Sample output: <i>
+<xmp>
+  Subjectivity: 16.666666666666664%
+  Main emotion: surprise. Emotion score: 33.333333333333336%
+</xmp> <br><br>
+</i> Currently available only for the Greek language. <br> <br> Submodule <a href="https://github.com/eellak/gsoc2018-spacy/blob/dev/spacy/lang/el/res/modules/emotions.py" target="_blank">link</a>. <br> <br>
+        </li>
+        <li class="gsoc-li" id="topic">Topic classifier. <span class="ph2 pv1 br2 bg-green white">nlp-task</span> <br> <br> This submodule is for text classification. It can categorize text in the following categories: Sports, Science, World News, Greek News, Environment, Politics,
+          Art, Health, Science.
+          <br> Currently available only for the Greek language. <br> <br>
+          <!--  TODO add link -->
+        </li>
+
+
+
+
+
+      </ol>
+
+
+      <h3 id="future"> Future Work </h3>
+      <p class="gsoc-p">
+        In this section, some suggestions for future work are listed. There are difficulty labels assigned to each task and some guidelines to start with. There are also labels which explain if each task refers to the improvement of Greek language support or
+        to the addition/improvement of a general nlp task. For more info on contribution, you can always have a look at the <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Contribute" target="_blank"> contribute page </a> of the project
+        wiki.
+      </p>
+      <ul>
+        <li class="gsoc-li">Add more rules to lemmatizer.
+          <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span>
+          <span class="ph2 pv1 br2 bg-black white"> Difficulty: easy </span>
+          <br><br> Greek language follows a rule based lemmatization technique. It is highly suggested to have a look in the lemmatizer wiki <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Lemmatizer" target="_blank">page</a> to understand more
+          about the approach followed. If you do, you will find out how scalable Greek language lemmatization is. Adding rules should be as easy as completing some lines in this <a href="https://github.com/explosion/spaCy/blob/master/spacy/lang/el/lemmatizer/_lemma_rules.py"
+            target="_blank">file</a>. For more info, check the contribute wiki <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Contribute" target="_blank">page</a>.
+          <br> <br>
+        </li>
+        <li class="gsoc-li">Overwrite the spaCy tokenizer.
+          <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span> <span class="ph2 pv1 br2 bg-black white"> Difficulty: hard </span></li> <br> <br>
+
+        <p class="gsoc-p"> Each language modifies the spaCy tokenization procedure by adding tokenizer exceptions. The tokenizer exceptions approach is not scalable for languages such as Greek. The reasons are pretty much the same as with the lemmatizer. A new approach,
+          rule-based tokenization is proposed. The suggested steps are the following: </p>
+        <ol>
+
+          <li class="gsoc-li"> Rewrite the spaCy tokenizer in pure Python, following the pseudo-code provided here. This is already done, you can find the code <a href="https://github.com/eellak/gsoc2018-spacy/blob/dev/spacy/lang/el/tokenizer.py" target="_blank">here</a>.
+            </li>
+          <li class="gsoc-li">Write regex expressions to catch the following phenomena of Greek language: "εκθλίψεις", "αφαιρέσεις", "αποκοπές".</li>
+          <li class="gsoc-li">Transform the tokens that match one of the phenomena mentioned above, to other(s) tokens using transformation rules. </li>
+        </ol>
+
+        <br> <br>
+        <li class="gsoc-li">Add noun chunks. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span> <span class="ph2 pv1 br2 bg-black white"> Difficulty: medium </span></li>
+        </li>
+
+        <br> <br>
+        <li class="gsoc-li">Improve models accuracy. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span> <span class="ph2 pv1 br2 bg-black white"> Difficulty: medium </span></li> <br> <br>
+        <li class="gsoc-li">Implement topic classifier for other languages as well. <span class="ph2 pv1 br2 bg-green white">nlp-task</span> <span class="ph2 pv1 br2 bg-black white"> Difficulty: medium </span></li>
+        </li> <br> <br>
+        <li class="gsoc-li">Implement sentiment analyzer for other languages as well. <span class="ph2 pv1 br2 bg-green white">nlp-task</span> <span class="ph2 pv1 br2 bg-black white"> Difficulty: medium </span></li>
+        </li> <br> <br>
+        <li class="gsoc-li">Implement attitude detector and integrate it to demo.<span class="ph2 pv1 br2 bg-green white">nlp-task</span> <span class="ph2 pv1 br2 bg-black white"> Difficulty: hard </span></li>
+        </li> <br> <br>
+
+      </ul>
+
+      <h3 id="people"> People </h3>
+
+      <p class="gsoc-p">
+        <!-- TODO add links -->
+        <ul>
+          <li class="gsoc-li"> Google Summer of Code 2018 Student: <b>Ioannis Daras</b>
+          </li>
+          <li class="gsoc-li"> Mentor: <b>Markos Gogoulos</b></li>
+          <li class="gsoc-li"> Mentor: <b>Panos Louridas</b></li>
+        </ul>
+      </p>
+
+
+  </div>
+</main>
+
+
+
+
+
+{% endblock %} {% block scripts %}
+<script>
+  var elems = document.querySelectorAll('li a');
+  for (var i = 0; i < elems.length; i++) {
+    elems[i].className = "";
+  }
+  elems[1].className = "active";
+</script>
+
+<script>
+  $(window).ready(function() {
+    $(".boton").wrapInner('<div class=botontext></div>');
+
+    $(".botontext").clone().appendTo($(".boton"));
+
+    $(".boton").append('<span class="twist"></span><span class="twist"></span><span class="twist"></span><span class="twist"></span>');
+
+    $(".twist").css("width", "25%").css("width", "+=3px");
+  });
+</script>
+{% endblock %}

@@ -18,22 +18,25 @@
     <script src="{% static "js/en.js" %}"></script>
     <script src="{% static "js/en-static-texts.js" %}"></script>
     <script src="{% static "js/displacy.js" %}"></script>
+    <script src="{% static "js/jquery.min.js" %}"></script>
 </head>
 
 <body>
     <header class="cf">
         <div class="logo">
-            <h1><a class="underline-hover" href="/" title="GR Text Analysis">Google Summer of Code 2018 - NLP Demo</a></h1>
+            <h1><a href="/"> NLPBuddy - Open Source Text Analysis Tool</a></h1>
             <img src="https://img.shields.io/badge/made%20with%20❤%20and-spaCy-09a3d5.svg">
         </div>
         <div class="toggle-nav">
             <span class="toggle-nav-icon"></span>
         </div>
-        <nav class="main-nav tc">
+        <nav id="navBar" class="main-nav tc">
             <ul>
-                <li><a target="_" href="https://github.com/eellak/gsoc2018-spacy">GSOC project Code</a></li>
-								<li><a target="_" href="https://github.com/eellak/text-analysis">Demo Code</a></li>
-                <li><a href="/about">About</a></li>
+                <li><a href="/" class="active">Demo</a></li>
+                <li><a href="/gsoc">About GSOC 2018 Project</a></li>
+                <!-- <li><a target="_" href="https://github.com/eellak/gsoc2018-spacy">GSOC project Code</a></li> -->
+                <li><a href="/about">About Demo</a></li>
+								<!-- <li><a target="_" href="https://github.com/eellak/text-analysis">Demo Code</a></li> -->
             </ul>
         </nav>
         <div class="lang-selection">

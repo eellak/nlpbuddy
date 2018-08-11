@@ -1,9 +1,4 @@
 import json
-
-import requests
-from bs4 import BeautifulSoup
-from readability import Document
-
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
@@ -14,22 +9,34 @@ if settings.ALLOW_URL_IMPORTS:
     from bs4 import BeautifulSoup
     from readability import Document
 
+
 def index(request):
     'Index view'
     context = {}
     return render(request, 'nlp/index.html', context)
+
 
 def about(request):
     'About view'
     context = {}
     return render(request, 'nlp/about.html', context)
 
+
+def gsoc(request):
+    'About gsoc'
+    context = {}
+    return render(request, 'nlp/gsoc.html', context)
+
+
 def visualize_view(request):
-    ret={}
+    ret = {}
     text = request.POST.get('sentences')
+    if (text is None):
+        return render(request, 'nlp/visualize_error.html')
     markup = visualize_text(text)
     ret['json'] = markup
     return render(request, 'nlp/visualize.html', ret)
+
 
 def analyze(request):
     'API text analyze view'
@@ -51,7 +58,8 @@ def analyze(request):
             text = '{0}.\n{1}'.format(title, text)
 
         if not text:
-            response = JsonResponse({'status':'false','message':'need some text here!'})
+            response = JsonResponse(
+                {'status': 'false', 'message': 'need some text here!'})
             response.status_code = 400
             return response
 

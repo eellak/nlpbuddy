@@ -1,196 +1,251 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
-    <main>
-        <div class="left-side w-100 w-60-l">
-            <div class="side-inner">
-                <div class="text-source-box">
-                    <div class="text-source-box-inner">
+<main>
+  <div class="left-side w-100 w-60-l">
+    <div class="side-inner">
+      <div class="text-source-box">
+        <div class="text-source-box-inner">
 
-                        <div class="text-source-selection">
+          <div class="text-source-selection">
 
-                            <div class="select-static-text fl current">
-                                <select>
+            <div class="select-static-text fl current">
+              <select>
                         <option value="false">Select text to analyze....</option>
                     </select>
-                                <span class="arrow">&#9660;</span>
-                            </div>
+              <span class="arrow">&#9660;</span>
+            </div>
 
 
-                            <div class="select-custom-text fr">
-                                <button>Analyze your own text</button>
-                            </div>
+            <div class="select-custom-text fr">
+              <button>Analyze your own text</button>
+            </div>
 
-                        </div>
+          </div>
 
-                        <textarea class="editor-source static-text-textarea"></textarea>
-                        <textarea class="editor-source custom-text-textarea" placeholder="Enter text or URL"></textarea>
+          <textarea class="editor-source static-text-textarea"></textarea>
+          <textarea class="editor-source custom-text-textarea" placeholder="Enter text or URL"></textarea>
 
-                        <div class="actions-row">
-                            <button class="analyze-it">Analyze it</button>
-                        </div>
-                    </div>
-                </div>
+          <div class="actions-row">
+            <button class="analyze-it">Analyze it</button>
+          </div>
+        </div>
+      </div>
 
 
-                <div class="results-box text-results">
-                    <div class="rb-inner">
-                        <div class="rb-title">
-                            <span class="box-icon"><span><span><i class="material-icons">insert_drive_file</i></span></span></span>
-                            <h2>Results</h2>
-                            <span class="about-icon">
+      <div class="results-box text-results">
+        <div class="rb-inner">
+          <div class="rb-title">
+            <span class="box-icon"><span><span><i class="material-icons">insert_drive_file</i></span></span>
+            </span>
+            <h2>Results</h2>
+            <span class="about-icon">
                                 <span>
                                     <span>
                                         <span class="tooltip" data-content="Hover over a token to see it's information, as lemma and part of speech. Supported languages are Greek, English, German, French, Italian, French, Dutch, Spanish and Portoguese."><i class="material-icons">info</i></span>
-                                    </span>
-                                </span>
-                            </span>
-                        </div>
-                        <div class="rb-content">-</div>
-                    </div>
-                </div>
-            </div>
+            </span>
+            </span>
+            </span>
+          </div>
+          <div class="rb-content">-</div>
+        </div>
+      </div>
+    </div>
 
-            <div class="results-box sentences">
-                <form id="myForm" action="visualize" method="post">
-                  <div class="rb-inner">
-                      <div class="rb-title">
-                          <span class="box-icon"><span><span><i class="material-icons">format_quote</i></span></span></span>
-                          <h3>Sentences</h3>
-                          <span class="visualize-btn">
-  							               <span><span><a onclick="document.getElementById('myForm').submit();" class="mv1 f8 link dim br3 ba bw1 ph3 pv2 mb2 dib black">DEP Analysis</a></span></span>
-  						            </span>
-  						            <span class="toggle-option">
+    <div class="results-box sentences">
+      <form id="myForm" target="_blank" action="visualize" method="post">
+        <div class="rb-inner">
+          <div class="rb-title">
+            <span class="box-icon"><span><span><i class="material-icons">format_quote</i></span></span>
+            </span>
+            <h3>Sentences</h3>
+            <span class="toggle-option">
   							               <span><span><label>Lemmatized<input type="checkbox" class="lemmatize-sentences" /></label></span></span>
-  						            </span>
-                          <span class="about-icon">
+            </span>
+            <span class="about-icon">
                               <span>
                                   <span>
-                                      <span class="tooltip" data-content="Text split in sentences"><i class="material-icons">info</i></span>
-                                  </span>
-                              </span>
-                          </span>
-                      </div>
-                      <div class="rb-content"></div>
-                  </div>
-              </form>
-            </div>
+                                      <span class="tooltip" data-content="Text split in sentences. Click the eye icon next to the sentence, for Dependency Analysis Visualization."><i class="material-icons">info</i></span>
+            </span>
+            </span>
+            </span>
+          </div>
+          <div class="rb-content">-</div>
         </div>
+      </form>
+    </div>
+  </div>
 
 
-        <div class="right-side w-100 w-40-l">
-            <div class="side-inner">
+  <div class="right-side w-100 w-40-l">
+    <div class="side-inner">
 
-                <div class="results-box various">
-                    <div class="rb-inner">
-                        <div class="rb-title">
-                            <span class="box-icon"><span><span><i class="material-icons">arrow_forward</i></span></span></span>
-                            <h3>Various</h3>
-                            <span class="about-icon">
+      <div class="results-box various">
+        <div class="rb-inner">
+          <div class="rb-title">
+            <span class="box-icon"><span><span><i class="material-icons">arrow_forward</i></span></span>
+            </span>
+            <h3>Various</h3>
+            <span class="about-icon">
                                 <span>
                                     <span>
-					    <span class="tooltip" data-content="Language identification done via langid.py. Category works only for Greek text"><i class="material-icons">info</i></span>
-                                    </span>
-                                </span>
-                            </span>
-                        </div>
-                        <div class="rb-content">-</div>
-                    </div>
-                </div>
-                <div class="results-box keywords">
-                    <div class="rb-inner">
-                        <div class="rb-title">
-                            <span class="box-icon"><span><span><i class="material-icons">label</i></span></span></span>
-                            <h3>Keywords</h3>
-                            <span class="about-icon">
+					    <span class="tooltip" data-content="Language identification done via langid.py. Category works only for Greek text. Emotion and subjectivity analysis are using a lexicon approach and are currently available only for Greek language."><i class="material-icons">info</i></span>
+            </span>
+            </span>
+            </span>
+          </div>
+          <div class="rb-content">-</div>
+        </div>
+      </div>
+      <div class="results-box keywords">
+        <div class="rb-inner">
+          <div class="rb-title">
+            <span class="box-icon"><span><span><i class="material-icons">label</i></span></span>
+            </span>
+            <h3>Keywords</h3>
+            <span class="about-icon">
                                 <span>
                                     <span>
                                         <span class="tooltip" data-content="Top keywords extracted"><i class="material-icons">info</i></span>
-                                    </span>
-                                </span>
-                            </span>
-                        </div>
-                        <div class="rb-content">-</div>
-                    </div>
-                </div>
-                <div class="results-box summary">
-                    <div class="rb-inner">
-                        <div class="rb-title">
-                            <span class="box-icon"><span><span><i class="material-icons">short_text</i></span></span></span>
-                            <h3>Summary</h3>
-                            <span class="about-icon">
+            </span>
+            </span>
+            </span>
+          </div>
+          <div class="rb-content">-</div>
+        </div>
+      </div>
+      <div class="results-box summary">
+        <div class="rb-inner">
+          <div class="rb-title">
+            <span class="box-icon"><span><span><i class="material-icons">short_text</i></span></span>
+            </span>
+            <h3>Summary</h3>
+            <span class="about-icon">
                                 <span>
                                     <span>
                                         <span class="tooltip" data-content="Summary produced using TextRank algorithm"><i class="material-icons">info</i></span>
-                                    </span>
-                                </span>
-                            </span>
-                        </div>
-                        <div class="rb-content">-</div>
-                    </div>
-                </div>
-                <div class="results-box entities">
-                    <div class="rb-inner">
-                        <div class="rb-title">
-                            <span class="box-icon"><span><span><i class="material-icons">person</i></span></span></span>
-                            <h3>Entities</h3>
-                            <span class="about-icon">
+            </span>
+            </span>
+            </span>
+          </div>
+          <div class="rb-content">-</div>
+        </div>
+      </div>
+      <div class="results-box entities">
+        <div class="rb-inner">
+          <div class="rb-title">
+            <span class="box-icon"><span><span><i class="material-icons">person</i></span></span>
+            </span>
+            <h3>Entities</h3>
+            <span class="about-icon">
                                 <span>
                                     <span>
                                         <span class="tooltip" data-content="Entities as Persons, Locations, Organizations"><i class="material-icons">info</i></span>
-                                    </span>
-                                </span>
-                            </span>
-                        </div>
-                        <div class="rb-content">-</div>
-                    </div>
-                </div>
-                <div class="results-box part-of-speech">
-                    <div class="rb-inner">
-                        <div class="rb-title">
-                            <span class="box-icon"><span><span><i class="material-icons">insert_comment</i></span></span></span>
-                            <h3>Part of Speech</h3>
-                            <span class="about-icon">
+            </span>
+            </span>
+            </span>
+          </div>
+          <div class="rb-content">-</div>
+        </div>
+      </div>
+      <div class="results-box part-of-speech">
+        <div class="rb-inner">
+          <div class="rb-title">
+            <span class="box-icon"><span><span><i class="material-icons">insert_comment</i></span></span>
+            </span>
+            <h3>Part of Speech</h3>
+            <span class="about-icon">
                                 <span>
                                     <span>
                                         <span class="tooltip" data-content="Part of Speech, verbs, adjectives and nouns"><i class="material-icons">info</i></span>
-                                    </span>
-                                </span>
-                            </span>
-                        </div>
-                        <div class="rb-content">-</div>
-                    </div>
-                </div>
-                <div class="results-box tokens">
-                    <div class="rb-inner">
-                        <div class="rb-title">
-                            <span class="box-icon"><span><span><i class="material-icons">text_format</i></span></span></span>
-                            <h3>Tokens</h3>
-                            <span class="about-icon">
+            </span>
+            </span>
+            </span>
+          </div>
+          <div class="rb-content">-</div>
+        </div>
+      </div>
+      <div class="results-box lexical-attrs">
+        <div class="rb-inner">
+          <div class="rb-title">
+            <span class="box-icon"><span><span><i class="material-icons">alternate_email</i></span></span>
+            </span>
+            <h3>Lexical attributes</h3>
+            <span class="about-icon">
+                                <span>
+                                    <span>
+                                        <span class="tooltip" data-content="Lexical attributes such as urls, emails, numericals."><i class="material-icons">info</i></span>
+            </span>
+            </span>
+            </span>
+          </div>
+          <div class="rb-content">-</div>
+        </div>
+      </div>
+      <div class="results-box tokens">
+        <div class="rb-inner">
+          <div class="rb-title">
+            <span class="box-icon"><span><span><i class="material-icons">text_format</i></span></span>
+            </span>
+            <h3>Tokens</h3>
+            <span class="about-icon">
                                 <span>
                                     <span>
                                         <span class="tooltip" data-content="Text tokenized"><i class="material-icons">info</i></span>
-                                    </span>
-                                </span>
-                            </span>
-                        </div>
-                        <div class="rb-content">-</div>
-                    </div>
-                </div>
-            </div>
+            </span>
+            </span>
+            </span>
+          </div>
+          <div class="rb-content">-</div>
         </div>
-    </main>
+      </div>
 
-
-
-
-
-    <div class="loader-container">
-        <div>
-            <div>
-                <div class="loader">Loading...</div>
-            </div>
+      <div class="results-box noun-chunks">
+        <div class="rb-inner">
+          <div class="rb-title">
+            <span class="box-icon"><span><span><i class="material-icons">group_work</i></span></span>
+            </span>
+            <h3>Noun chunks</h3>
+            <span class="about-icon">
+                                <span>
+                                    <span>
+                                        <span class="tooltip" data-content="Noun chunks are base noun phrases."><i class="material-icons">info</i></span>
+            </span>
+            </span>
+            </span>
+          </div>
+          <div class="rb-content">-</div>
         </div>
+      </div>
     </div>
+  </div>
+</main>
+
+
+
+
+
+<div class="loader-container">
+  <div>
+    <div>
+      <div class="loader">Loading...</div>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block scripts %}
+<script>
+  function trigger(elem) {
+    var form = document.getElementById("myForm");
+    var inp = document.createElement('input');
+    inp.setAttribute("type", "text");
+    inp.setAttribute("value", elem.id);
+    inp.setAttribute("name", "sentences");
+    form.appendChild(inp);
+    form.submit();
+    form.removeChild(inp);
+  }
+</script>
+
+
 
 {% endblock %}
