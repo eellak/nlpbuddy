@@ -1,8 +1,8 @@
-# text-analysis
+# NLPBuddy - Open Source Text Analysis Tool
 
 ## About the project
 
-This is a text analysis application for performing common NLP tasks through a web dashboard interface and an API. 
+NLPBuddy is a text analysis application for performing common NLP tasks through a web dashboard interface and an API. 
 
 It leverages [Spacy](https://spacy.io) for the NLP tasks plus [Gensim's](https://github.com/RaRe-Technologies/gensim) implementation of the TextRank algorithm for text summarization. 
 
