@@ -23,7 +23,7 @@ Text can either be provided or imported after specifying a url - we use library 
 The Greek classifier is built with [FastText](https://fasttext.cc) and is trained in 20.000 articles labeled in these categories.
 
 ## Demo
-A working demo can be found on [http://nlp.wordgames.gr](http://nlp.wordgames.gr)
+A working demo can be found on [http://www.nlpbuddy.io/](http://www.nlpbuddy.io/)
 
 ## Usage
 Enter text and hit 'Analyze it', 
