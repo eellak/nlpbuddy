@@ -15,7 +15,7 @@
           <li class="gsoc-p dim"><a href="#NLPBuddy"> NLPBuddy - Open Source Text Analysis Tool </a></li>
           <li class="gsoc-p dim"><a href="#greek-spacy"> Integration of Greek language to spaCy - Merged Pull Request</a></li>
           <li class="gsoc-p dim"><a href="#greek-models"> Greek language models </a></li>
-          <li class="gsoc-p dim"><a href="#spacy"> Empowerment of spaCy </a></li>
+          <li class="gsoc-p dim"><a href="#spacy">Improvements in spaCy </a></li>
         </ul>
         <li class="gsoc-li dim"><a href="#deliverables"> Deliverables </a></li>
 
@@ -46,9 +46,9 @@
     <p class="gsoc-p"> This section contains some useful links/resources for the project. <br> <br>
 
       <ul>
-        <li class="gsoc-li">The first link is the project repository where you can all the work that is related to the integration of Greek language to spaCy platform. <br>
+        <li class="gsoc-li">The first link is the project repository where you can see all the work that is related to the addition of Greek language support to spaCy platform. <br>
         </li>
-        <li class="gsoc-li"> The second link is the NLPBuddy repository in which you can find all the work related to the implementation of an opensource demo on top of spaCy that demonstrates and performs free and for all common NLP tasks in 7 languages, including Greek.
+        <li class="gsoc-li"> The second link is the NLPBuddy repository in which you can find all the work related to the implementation of an open source demo on top of spaCy that demonstrates and performs common NLP tasks in 7 languages, including Greek.
           </li>
 
         <li class="gsoc-li"> The third link is the project wiki in which you will find detailed and explanatory documentation for everything related to the integration of Greek language to spaCy.
@@ -105,7 +105,7 @@
       </div>
       <h2 class="wow" id="problem-statement"> Problem Statement - Project Goals </h2>
       <p class="wow gsoc-p">
-        We live in the era of data. <b>Every minute</b>, 3.8 billion internet users, produce content; more than 120 million emails , 500.000 Facebook comments, 3 million Google searches. If we want to process that amount of data efficiently, we need to
+        We live in the era of data. <b>Every minute</b>, 3.8 billion internet users, produce content; more than 120 million emails, 500,000 Facebook comments, 3 million Google searches. If we want to process that amount of data efficiently, we need to
         process natural language. Open source projects such as spaCy, textblob, or NLTK contribute significantly to that direction and thus they need to be reinforced.
 
         <br> <br> This project is about improving the quality of Natural Language Processing of Greek Language.
@@ -113,7 +113,7 @@
         <ol>
           <li class="gsoc-li"> Integration of Greek language to spaCy platform <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li>
           <li class="gsoc-li"> Production of models for Part-Of-Speech (POS) tagging, Dependency Analysis (DEP) and Named Entities Recognition (NER), with and without vectors. <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li>
-          <li class="gsoc-li"> An open-source text analysis tool (demo) in which everyone can perform common NLP tasks in 7 languages. <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li>
+          <li class="gsoc-li"> An open source text analysis tool (demo) in which everyone can perform common NLP tasks in 7 languages. <span class="ph2 pv1 br2 bg-green white"> Status: Complete</span> </li>
         </ol>
       </p>
 
@@ -134,8 +134,8 @@
       </div>
 
       <p class="gsoc-p">
-        NLPBuddy is an open-source text analysis tool that has been developed as a demonstration of the project results. <br> <br> NLPBuddy leverages <a target="_blank" href="https://spacy.io/"> Spacy's </a> capabilities to extract as much information
-        as possible from a raw text.
+        NLPBuddy is an open source text analysis tool that has been developed as a demonstration of the project results. <br> <br> NLPBuddy leverages <a target="_blank" href="https://spacy.io/"> Spacy's </a> capabilities to extract as much information
+        as possible from raw text.
 
       </p>
 
@@ -147,7 +147,7 @@
 
       <p class="gsoc-p"> Briefly, in this demo you can perform the following tasks with your text in <b> 7 languages</b>: </p>
       <ol>
-        <li class="gsoc-li"> Language identification (performed using langid library). </li>
+        <li class="gsoc-li"> Language identification (performed using the <a href="https://github.com/saffsd/langid.py" target="_blank">langid</a> library). </li>
         <li class="gsoc-li"> Text tokenization. </li>
         <li class="gsoc-li"> Sentence splitting. </li>
         <li class="gsoc-li"> Lemmatization. </li>
@@ -157,7 +157,7 @@
         <li class="gsoc-li"> Keywords extraction. </li>
         <li class="gsoc-li"> For the Greek language, there are also the following bonus features:
           <ul>
-            <li class="gsoc-li"> <b> Text Categorization </b> among the following categories: Sports, Science, World News, Greek News, Environment, Politics, Art, Health, Science. <br> The Greek classifier is built with FastText and is trained in 20.000 articles labeled in
+            <li class="gsoc-li"> <b> Text Categorization </b> among the following categories: Sports, Science, World News, Greek News, Environment, Politics, Art, Health, Science. <br> The Greek classifier is built with <a href="https://github.com/facebookresearch/fastText" target="_blank">FastText</a> and is trained in 20,000 articles labeled in
               these categories. <br>
               <b> Accuracy reaches 90% </b>.</li>
             <li class="gsoc-li"> Text subjectivity analysis. </li>
@@ -169,11 +169,11 @@
 
       <p class="gsoc-p"> The supported languages at the moment are the following: Greek, English, German, Spanish, Portuguese, French, Italian and Dutch.
 
-        <br> <br> Text can either be provided or imported from a URL. For the preprocess of the text imported from url, the following libraries are used: python readability, BeautifulSoup4.
+        <br> <br> Text can either be provided or imported from a URL. For the preprocess of the text imported from a URL, the following libraries are used: python <a href="https://github.com/buriy/python-readability" target="_blank">readability</a>, <a href="https://www.crummy.com/software/BeautifulSoup/" target="_blank">BeautifulSoup4</a>.
 
       </p>
 
-      <h3 class="wow" id="greek-spacy"> Integration of Greek language to spaCy.</h3>
+      <h3 class="wow" id="greek-spacy">Addition of Greek language support to spaCy.</h3>
 
       <p class="gsoc-p">
 
@@ -205,7 +205,7 @@
         <img class="wow slideInUp" src="../../static/img/gsoc-images/ner2.png">
       </div>
 
-      <h3 id="spacy"> Empowerment of spaCy </h3>
+      <h3 id="spacy">Improvements in spaCy</h3>
       <p class="gsoc-p">
         A side goal of the project is to empower spaCy itself. There is an open-dialogue with the creators of spaCy, who we would like to thank for their continuous support and enthusiasm.
       </p>
@@ -225,7 +225,7 @@
       <p class="gsoc-p">
         In the process of integrating Greek language to spaCy some new approaches are followed. Hopefully, these approaches will inspire other languages too.
         <ul>
-          <li class="gsoc-li"> Greek language is the second language that follows a rule based lemmatization procedure.</li>
+          <li class="gsoc-li"> The Greek language is the second language that follows a rule based lemmatization procedure.</li>
           <li class="gsoc-li"> There were no available data for training NER classifier, so there was a need for creating data. A fast procedure of annotating data using Prodigy annotation tool is proposed for future reference.</li>
         </ul>
       </p>
@@ -437,7 +437,7 @@ __________________|______
         <li class="gsoc-li">Add more rules to lemmatizer.
           <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span>
           <span class="ph2 pv1 br2 bg-black white"> Difficulty: easy </span>
-          <br><br> Greek language follows a rule based lemmatization technique. It is highly suggested to have a look in the lemmatizer wiki <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Lemmatizer" target="_blank">page</a> to understand more
+          <br><br> The Greek language follows a rule based lemmatization technique. It is highly suggested to have a look in the lemmatizer wiki <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Lemmatizer" target="_blank">page</a> to understand more
           about the approach followed. If you do, you will find out how scalable Greek language lemmatization is. Adding rules should be as easy as completing some lines in this <a href="https://github.com/explosion/spaCy/blob/master/spacy/lang/el/lemmatizer/_lemma_rules.py"
             target="_blank">file</a>. For more info, check the contribute wiki <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Contribute" target="_blank">page</a>.
           <br> <br>
