@@ -31,11 +31,12 @@
           <li class="gsoc-p dim"><a href="#splitter"> Sentence splitter </a></li>
           <li class="gsoc-p dim"><a href="#stop-words"> Stop words </a></li>
           <li class="gsoc-p dim"><a href="#norms"> Norm exceptions </a></li>
-
+          <li class="gsoc-p dim"><a href="#ner_data"> Named Entities dataset </a> </li>
           <li class="gsoc-p dim"><a href="#lex_attrs"> Lexical Attributes </a></li>
           <li class="gsoc-p dim"><a href="#pos"> POS Tagger </a></li>
           <li class="gsoc-p dim"><a href="#dep"> DEP Tagger </a></li>
           <li class="gsoc-p dim"><a href="#ner"> NER Tagger </a></li>
+          <li class="gsoc-p dim"><a href="#noun_chunks"> Noun Chunks </a></li>
           <li class="gsoc-p dim"><a href="#emotion"> Sentiment Analyzer </a></li>
           <li class="gsoc-p dim"><a href="#topic"> Topic classifier </a></li>
         </ul>
@@ -140,8 +141,8 @@ info
 
         You can find the timeline <a href="https://github.com/eellak/gsoc2018-spacy/projects/1" target="_blank">here</a>. <br> <br>
 
-        <u> DISCLAIMER</u>: Due to the huge complexity of the project, it is impossible even for me to list everything that I have done during
-        Google Summer of Code. I managed to list over 50 Completed Tasks but I am pretty sure that there are some more missing.
+        <u> DISCLAIMER</u>: Due to the huge complexity of the project, it is almost impossible to list everything that was implemented
+        during Google Summer of Code 2018. There are over 50 Completed Tasks in the Timeline, but the list may be enriched in the near future.
 
 </p>
       </div>
@@ -163,7 +164,7 @@ info
 
       <br> <br>
 
-      <p class="gsoc-p"><u> Note </u>: As you can see all the project goals have been achieved. However, the good news is that a lot more side results have been produced.
+      <p class="gsoc-p"><u> Note </u>: All the project goals have been achieved. Added to this, there are a lot more side results that have been produced during Google Summer of Code 2018.
       Analysis of the achievements (with pull requests, links to production ready modules, etc) follows in the next two sections. </p>
 
 
@@ -179,10 +180,10 @@ arrow_right_alt
         <p class="gsoc-p">
 
           Greek language has been successfully added to spaCy, which was actually the most important goal of the project. <br><br>
-          There were two pull requests for this purpose; the first was the initial addition of the language and the second pull request contained important optimizations that made the support for the Greek language probably the most complete in terms of features after the English language.
+          Two pull requests have been made; the first pull request is about the initial addition of the language and the second pull request contains important optimizations and additions that enrich the features Greek language class supports.
 
-          <br> <br><u>Addition of the language</u>: You can see the first pull request <a href="https://github.com/explosion/spaCy/pull/2558" target="_blank"> here</a>. <br> <br>
-          <u>Optimizations to the Greek language class</u>: You can see the second pull request <a href="https://github.com/explosion/spaCy/pull/2658" target="_blank"> here</a>. <br> <br>
+          <br> <br><u>Addition of the language</u>: You can see the first pull request <a href="https://github.com/explosion/spaCy/pull/2558" target="_blank"> here</a> (Status: Merged)<br> <br>
+          <u>Optimizations to the Greek language class</u>: You can see the second pull request <a href="https://github.com/explosion/spaCy/pull/2658" target="_blank"> here</a> (Status: Pending) <br> <br>
 
 
            Each part of the process of integrating Greek language to spaCy is discussed in detail in the <a target="_blank"
@@ -204,7 +205,7 @@ arrow_right_alt
   python3 -m spacy download el_core_web_lg
 </xmp>
 
-For now, you can download the model tar file from <a href="" target="_blank">here</a>.
+For now, you can download the Greek small model tar file from <a href="https://github.com/eellak/gsoc2018-spacy/tree/dev/spacy/lang/el/training/models/small_with_entities_new" target="_blank">here</a>.
 <p class="gsoc-p">
   Greek language models support most of the capabilities that you will find in the <a href="#deliverables">deliverables</a> section. Sentence splitting, tokenization, Part Of Speech Tagging, Syntax Analysis using DEP tags, Named Entities Recognition,
   lexical attributes extraction, norm exceptions and stop-words lists, are all included the Greek language models. The big Greek model (el_core_web_lg) includes word vectors so it supports features such as similarity detection between texts.
@@ -312,7 +313,7 @@ crop_square
         In the process of integrating Greek language to spaCy some new approaches are followed. Hopefully, these approaches will inspire other languages too.
         <ul>
           <li class="gsoc-li"> The Greek language is the second language that follows a rule based lemmatization procedure.</li>
-          <li class="gsoc-li"> There were no available data for training NER classifier, so there was a need for creating data. A fast procedure of annotating data using Prodigy annotation tool is proposed for future reference.</li>
+          <li class="gsoc-li"> There were no available data for training NER classifier, so there was a need for creating data. A fast procedure of annotating data using Prodigy annotation tool is proposed for future reference. Learn more about it in the corresponding wiki <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Prodigy" target="_blank">page</a>.</li>
         </ul>
       </p>
     </div>
@@ -380,7 +381,7 @@ crop_square
 
           <div class="wow slideInLeft">
             <img class="m0 p0" src="../../static/img/gsoc-images/stop-words.png">
-            <blockquote class="w-50-l w-50 fr dib absolute">
+            <blockquote class="w-50-l w-100-m fr-l dib-l absolute-l">
               <div class="bl black  bw1">
                 <p class="mh2"> In computing, stop words are words which are filtered out before or after processing of natural language data. Though "stop words" usually refers to the most common words in a language, there is no single universal list of stop words used
                   by all natural language processing tools, and indeed not all tools even use such a list. Some tools specifically avoid removing these stop words to support phrase search. </p>
@@ -397,7 +398,7 @@ crop_square
 
           <div class="wow slideInLeft">
             <img class="m0 p0" src="../../static/img/gsoc-images/spelling.png">
-            <blockquote class="w-50-l w-50 fr dib absolute">
+            <blockquote class="w-50-l w-100-m fr-l dib-l absolute-l">
               <div class="bl black  bw1">
                 <p class="mh2"> spaCy usually tries to normalise words with different spellings to a single, common spelling. This has no effect on any other token attributes, or tokenization in general, but it ensures that equivalent tokens receive similar representations.
                   This can improve the model's predictions on words that weren't common in the training data, but are equivalent to other words – for example, "realize" and "realise", or "thx" and "thanks". </p>
@@ -408,6 +409,13 @@ crop_square
           <p class="gsoc-p"> The norm-exceptions wiki page is available <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Norm-exceptions" target="_blank"> here.</a> The final list with the stop-words of Greek language can be found <a href="https://github.com/explosion/spaCy/blob/master/spacy/lang/el/norm_exceptions.py"
               target="_blank">here</a>.</p>
           <br> <br>
+        </li>
+
+        <li id="ner_data" class="gsoc-li"> Named Entities annotated dataset. <span class="ph2 pv1 br2 bg-yellow white">resource</span><br> <br>
+          For Greek language, there was no available dataset for Named Entities. So, we had to create our own annotated dataset using Prodigy.
+          The annotated dataset is available <a href="https://github.com/eellak/gsoc2018-spacy/blob/dev/spacy/lang/el/training/datasets/annotated_data/ner.jsonl" target="_blank"> here</a>.
+          <br> You can learn more about NER and Prodigy in the following links: <a href="https://github.com/eellak/gsoc2018-spacy/wiki/NER" target="_blank">Link 1</a>, <a href="https://github.com/eellak/gsoc2018-spacy/wiki/Prodigy" target="_blank">Link 2</a>.
+<br> <br>
         </li>
         <li class="gsoc-li" id="lex_attrs">Lexical Attributes Functions. <span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span> <br> <br> Each token of a spaCy doc is checked against some potential attributes. In this way, <b>urls, nums and other types of special tokens </b>          can be
           <b>seperated</b> from the normal tokens. <br> <br> Sample input: <i>Η ιστοσελίδα για το demo μας είναι: https://nlp.wordames.gr</i> <br> <br> Sample output: <i>Url: https://nlp.wordames.gr
@@ -491,9 +499,29 @@ __________________|______
         <img class="wow slideInLeft m0 p0" src="../../static/img/gsoc-images/ner3.png">
 
         <p class="gsoc-p">
+
           For extensive documentation of NER tagger for Greek language, check the corresponding wiki <a href="https://github.com/eellak/gsoc2018-spacy/wiki/NER" target="_blank">page</a>. Submodule <a href="https://github.com/eellak/gsoc2018-spacy/blob/dev/spacy/lang/el/res/modules/ents.py"
             target="_blank">link</a>. </p>
         <br>
+        <li class="gsoc-li" id="noun_chunks"> Noun chunks.<span class="ph2 pv1 br2 bg-blue white"> greek-spacy-support </span><br> <br>
+          <blockquote>
+            <div class="wow slideInLeft bl black gsoc-p ph2 bw1">
+          Noun chunks are "base noun phrases" – flat phrases that have a noun as their head. You can think of noun chunks as a noun plus the words describing the noun – for example, "the lavish green grass" or "the world's largest tech fund".
+        </div>
+        </blockquote>
+        <br> <br>
+        In the latest <a href="https://github.com/explosion/spaCy/pull/2658" target-"_blank">pull request</a> noun chunks for Greek language are supported. <br> <br>
+        Sample input: <br>
+        <i><xmp>Η όμορφη ιδέα του άλλαξε την μίζερη ζωή.
+        </xmp> </i>
+
+        Sample output: <br>
+        <i><xmp>
+όμορφη ιδέα
+την μίζερη ζωή
+
+        </xmp> </i> <br> <br>
+        </li> <br> <br>
         <li class="gsoc-li" id="emotion">Sentiment Analyzer. <span class="ph2 pv1 br2 bg-green white">nlp-task</span> <br> <br> This submodule gives you a <b> subjectivity score </b> for your text and an <b> emotion analysis </b>. <br> <br> Sample input: <i>Έχω μείνει έκπληκτος! Πώς γίνεται αυτό; Η έκπληξη είναι τόσο μεγάλη! Α, τώρα εξηγούνται όλα.</i>          <br> <br> Sample output: <i>
 <xmp>
   Subjectivity: 16.666666666666664%
