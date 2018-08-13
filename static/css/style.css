@@ -1062,3 +1062,14 @@ body.is-loading .loader-container {
 .boton:hover .botontext:nth-of-type(2) {
   transform: matrix3d(1, 0, 0, 0, 0, 0, -1, 0.003, 0, 1, 0, 0, 0, 0, 0, 1);
 }
+
+@media screen and (max-width: 700px) {
+  .wow {
+    visibility: visible !important;
+    -webkit-animation: none !important;
+       -moz-animation: none !important;
+         -o-animation: none !important;
+        -ms-animation: none !important;
+            animation: none !important;
+  }
+}
