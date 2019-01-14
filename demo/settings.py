@@ -125,7 +125,7 @@ MEDIA_ROOT = BASE_DIR + '/media/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-ALLOWED_HOSTS = ['nlp.wordgames.gr', 'localhost']
+ALLOWED_HOSTS = ['nlp.wordgames.gr', 'localhost', 'nlpbuddy.io', 'www.nlpbuddy.io']
 
 LOGGING = {
     'version': 1,
@@ -151,7 +151,7 @@ import spacy
 # load any spaCy models that are installed
 # this takes some time to load so doing it here and hopefully this improves performance
 
-SUPPORTED_LANGUAGES = ['el', 'en', 'de', 'es', 'pt', 'fr', 'it', 'nl']
+SUPPORTED_LANGUAGES = ['de', 'es', 'pt', 'fr', 'it', 'nl']
 
 LANGUAGE_MODELS = {}
 
@@ -160,6 +160,9 @@ for language in SUPPORTED_LANGUAGES:
         LANGUAGE_MODELS[language] = spacy.load(language)
     except OSError:
         print('Warning: model {} not found. Run python3 -m spacy download {} and try again.'.format(language,language))
+
+LANGUAGE_MODELS['el'] = spacy.load('el_core_web_sm')
+LANGUAGE_MODELS['en'] = spacy.load('en_core_web_sm')
 
 # this is used to display the language name
 LANGUAGE_MAPPING = {
@@ -183,4 +186,3 @@ DEBUG = False
 # library python-readability fetches text from a URL 
 # and BeautifulSoup parses/removes tags
 ALLOW_URL_IMPORTS = True
-
